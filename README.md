@@ -20,7 +20,7 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 - you want to run something on all running hosts with `parallel`
 
 ## Configuration
-The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)
+The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds) [1] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL) [2].
 ```
 yes
 ```
@@ -29,4 +29,5 @@ yes
 `nc` `screen` `xz` `tcputils`
 
 ## References
-https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
+[1] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
+[2] https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/

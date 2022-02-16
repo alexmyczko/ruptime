@@ -25,7 +25,7 @@ yes
 ```
 
 ## Requirements
-nc screen xz tcputils
+`nc` `screen` `xz` `tcputils`
 
 ## References
 https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/

@@ -12,6 +12,13 @@ tuna             up    4+21:27,  0 users,  load 0.20, 0.25, 0.25
 dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 ```
 
+## Why would I want this?
+- monitoring systems have no or not very useful CLI tools
+- you don't want to manually keep a list of hosts
+- you want to see what hosts are down
+- you want to see what hosts are not idle
+- you want to run something on all running hosts with `parallel`
+
 ## Configuration
 ```
 yes

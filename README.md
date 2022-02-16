@@ -20,6 +20,7 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 - you want to run something on all running hosts with `parallel`
 
 ## Configuration
+The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)
 ```
 yes
 ```

@@ -28,6 +28,12 @@ yes
 ## Requirements
 `nc` `screen` `xz` `tcputils`
 
+## Supported Systems
+- macOS
+- Linux
+- FreeBSD
+- Windows if someone implements uptime.exe (https://www.windowscentral.com/how-check-your-computer-uptime-windows-10#check_pc_uptime_cmd)
+
 ## References
 [1] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 

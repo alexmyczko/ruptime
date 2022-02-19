@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source /etc/ruptime.conf
+
+if [ "${1}x" = "-ux" ]; then
+    u=$(uptime|sed 's/ days\?,[[:space:]]\+/+/;s, averages\?:,,;s/ min//'|awk -v h=$(eval $HOSTNAMECMD) '{$1="";printf "%-28s %s %11s %s %s %s %s %s %s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}')
+    echo ruptime "$u" | nc $SERVER $PORT
+    exit 0
+fi
+
+d=$(basename $0)
+(echo xz.$d) |
+(nc $SERVER $PORT) |
+(xz -d 2>/dev/null || echo "NO DATA FOUND ($?)" 1>&2)

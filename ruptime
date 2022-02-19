@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-source /etc/ruptime.conf
+if [ -f /etc/ruptime.conf ]; then
+    . /etc/ruptime.conf
+else
+    exit 1
+fi
 
 if [ "${SERVER}x" = "x" ]; then echo SERVER not set; exit 1; fi
 if [ "${PORT}x" = "x" ]; then echo PORT not set; exit 1; fi

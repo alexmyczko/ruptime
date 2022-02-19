@@ -16,7 +16,7 @@ if [ "${1}x" = "-ux" ]; then
     exit 0
 fi
 
-d=$(basename $0)
-(echo xz.$d) |
-(nc $SERVER $PORT) |
+d=$(basename "$0")
+(echo xz."$d") |
+(nc "$SERVER" "$PORT") |
 (xz -d 2>/dev/null || echo "NO DATA FOUND ($?)" 1>&2)

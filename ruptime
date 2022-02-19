@@ -2,6 +2,10 @@
 
 source /etc/ruptime.conf
 
+if [ "${SERVER}x" = "x" ]; then echo SERVER not set; exit 1; fi
+if [ "${PORT}x" = "x" ]; then echo PORT not set; exit 1; fi
+if [ "${HOSTNAMECMD}x" = "x" ]; then echo HOSTNAMECMD not set; exit 1; fi
+
 if [ "${1}x" = "-ux" ]; then
     u=$(uptime|sed 's/ days\?,[[:space:]]\+/+/;s, averages\?:,,;s/ min//'|awk -v h=$(eval $HOSTNAMECMD) '{$1="";printf "%-28s %s %11s %s %s %s %s %s %s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}')
     echo ruptime "$u" | nc $SERVER $PORT

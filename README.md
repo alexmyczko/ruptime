@@ -28,7 +28,8 @@ HOSTNAMECMD='hostname -f'
 ```
 
 ## Requirements
-`nc` `xz` `tcputils`
+- Client: `nc` `xz`
+- Server: `nc` `xz` `tcputils` `daemon`
 
 ## Supported Systems
 - macOS

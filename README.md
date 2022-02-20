@@ -30,6 +30,7 @@ HOSTNAMECMD='hostname -f'
 ## Requirements
 - Client: `nc` `xz`
 - Server: `nc` `xz` `tcputils` `daemon`
+- Optionals: `pen` `trickle` `gnupg`
 
 ## Supported Systems
 - macOS

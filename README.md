@@ -39,7 +39,7 @@ HOSTNAMECMD='hostname -f'
 - Windows if someone implements uptime.exe (https://www.windowscentral.com/how-check-your-computer-uptime-windows-10#check_pc_uptime_cmd)
 
 ## Starting it
-- FreeBSD: ?
+- FreeBSD: rc.d
 - Linux: daemon, init.d, cron @reboot, systemd...
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows

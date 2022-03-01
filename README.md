@@ -1,7 +1,7 @@
 # ruptime
 poor man’s ruptime
 
-Historically it is using broadcast udp/513 in a network.
+Historically it is using broadcast udp/513 [3] in a network.
 So this is a test how many machines it can take.
 
 ## Never heard of ruptime, what does it look like?
@@ -13,6 +13,7 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 ```
 
 ## Why would I want this?
+- it's simple [4]
 - monitoring systems have no or not very useful CLI tools
 - you don't want to manually keep a list of hosts
 - you want to see what hosts are down
@@ -53,3 +54,7 @@ crontab -l
 [1] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 
 [2] https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
+
+[3] https://manpages.debian.org/unstable/manpages/services.5.en.html
+
+[4] https://www.gkogan.co/blog/simple-systems/

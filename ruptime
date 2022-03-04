@@ -2,16 +2,25 @@
 
 if [ -f "$HOME"/.ruptime ]; then
     . "$HOME"/.ruptime
-elif [ -f /etc/ruptime.conf ]; then
-    . /etc/ruptime.conf
+elif [ -f /etc/ruptime/ruptime.conf ]; then
+    . /etc/ruptime/ruptime.conf
 else
-    echo "NO CONFIG"
+    echo "NO CONFIG FOUND in $HOME/.ruptime or /etc/ruptime/ruptime.conf"
     exit 1
 fi
 
-if [ "${SERVER}x" = "x" ]; then echo SERVER not set; exit 1; fi
-if [ "${PORT}x" = "x" ]; then echo PORT not set; exit 1; fi
-if [ "${HOSTNAMECMD}x" = "x" ]; then echo HOSTNAMECMD not set; exit 1; fi
+if [ -f "$HOME"/.ruptime.key ]; then
+    KEY="$HOME"/.ruptime.key
+elif [ -f /etc/ruptime/ruptime.key ]; then
+    KEY="/etc/ruptime/ruptime.key"
+else
+    echo "NO KEY FOUND in $HOME/.ruptime.key or /etc/ruptime/ruptime.key"
+    exit 1
+fi
+
+if [ "${SERVER}x" = "x" ]; then echo "SERVER not set"; exit 1; fi
+if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
+if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
 if [ "${1}x" = "-ux" ]; then
     u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}')

@@ -20,6 +20,11 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 - you want to see what hosts are not idle
 - you want to run something on all running hosts with `parallel`
 
+## Plan
+
+- allow to monitor custom variables
+- web presentation/views
+
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds) [1] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL) [2].
 ```

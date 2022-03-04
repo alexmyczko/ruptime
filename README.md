@@ -41,7 +41,7 @@ HOSTNAMECMD='hostname -f'
 
 ## Starting it
 - FreeBSD: rc.d
-- Linux: daemon, init.d, cron @reboot, systemd...
+- Linux: daemon, init.d, cron @reboot, systemd [5]
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows (not sure if they still have `net start`, haven't seen it since NT 4)
 
@@ -58,3 +58,5 @@ crontab -l
 [3] https://manpages.debian.org/unstable/manpages/services.5.en.html
 
 [4] https://www.gkogan.co/blog/simple-systems/
+
+[5] https://kill-9.xyz/harmful/software/systemd

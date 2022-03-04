@@ -23,7 +23,7 @@ if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
 if [ "${1}x" = "-ux" ]; then
-    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f /etc/ruptime/ruptime.key -Fq | base64 -w0)
+    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64 -w0)
     echo ruptime "$u" | nc "$SERVER" "$PORT"
     exit 0
 fi
@@ -31,4 +31,4 @@ fi
 d=$(basename "$0")
 (echo xz."$d") |
 (nc "$SERVER" "$PORT") |
-(base64 -d | mcrypt -d -f /etc/ruptime/ruptime.key -Fq | xz -d 2>/dev/null  || echo "NO DATA FOUND ($?)" 1>&2)
+(base64 -d | mcrypt -d -f "$KEY" -Fq | xz -d 2>/dev/null  || echo "NO DATA FOUND ($?)" 1>&2)

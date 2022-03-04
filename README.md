@@ -28,6 +28,9 @@ PORT=51300
 HOSTNAMECMD='hostname -f'
 ```
 
+Create a key for the encryption with mcrypt. You will need this on server and client for symmetric encryption.
+`COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.key`
+
 ## Requirements
 - Client: `nc` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`

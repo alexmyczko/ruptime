@@ -60,6 +60,35 @@ crontab -l
 */3 * * * * /usr/bin/ruptime -u
 ```
 
+- systemd
+
+```
+/etc/systemd/system/ruptime.service
+[Unit]
+Description=ruptime
+After=network.target
+Documentation=https://github.com/alexmyczko/ruptime/
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ruptime -u
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+/etc/systemd/system/ruptime.timer
+[Unit]
+Description=ruptime
+
+[Timer]
+OnBootSec=3m
+
+[Install]
+WantedBy=basic.target
+```
+
 ## References
 [1] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 

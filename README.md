@@ -38,6 +38,16 @@ Create a key for the encryption with `mcrypt`. You will need this on server and 
 COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.key
 ```
 
+Create a local user to run the daemon.
+```
+adduser --disabled-password --quiet --system --home /var/spool/ruptime --gecos "ruptime daemon" --group ruptime
+```
+
+Running the daemon.
+```
+daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
+```
+
 ## Requirements
 - Client: `nc` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`

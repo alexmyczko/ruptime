@@ -55,12 +55,13 @@ COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows (not sure if they still have `net start`, haven't seen it since NT 4)
 
+- without systemd
 ```
 crontab -l
 */3 * * * * /usr/bin/ruptime -u
 ```
 
-- systemd
+- with systemd
 
 ```
 /etc/systemd/system/ruptime.service

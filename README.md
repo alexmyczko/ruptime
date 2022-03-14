@@ -24,6 +24,7 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 
 - allow to monitor custom variables
 - web presentation/views
+- replace `mcrypt` with `openssl`
 
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds) [1] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL) [2].
@@ -51,7 +52,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ## Requirements
 - Client: `nc` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
-- Optionals: `pen` `trickle`
+- Optionals: `pen` `trickle` `timeout`
 
 ## Supported Systems
 - macOS

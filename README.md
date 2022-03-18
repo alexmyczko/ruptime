@@ -1,4 +1,5 @@
-# ruptime
+![ruptime](ruptime.png?raw=true "ruptime")
+
 poor man’s ruptime
 
 Historically it is using broadcast udp/513 [3] in a network.
@@ -24,6 +25,7 @@ dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
 
 - allow to monitor custom variables
 - web presentation/views
+- replace `mcrypt` with `openssl`
 
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds) [1] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL) [2].
@@ -38,10 +40,20 @@ Create a key for the encryption with `mcrypt`. You will need this on server and 
 COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.key
 ```
 
+Create a local user to run the daemon.
+```
+adduser --disabled-password --quiet --system --home /var/spool/ruptime --gecos "ruptime daemon" --group ruptime
+```
+
+Running the daemon.
+```
+daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
+```
+
 ## Requirements
 - Client: `nc` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
-- Optionals: `pen` `trickle`
+- Optionals: `pen` `trickle` `timeout`
 
 ## Supported Systems
 - macOS
@@ -55,9 +67,39 @@ COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows (not sure if they still have `net start`, haven't seen it since NT 4)
 
+- without systemd
 ```
 crontab -l
 */3 * * * * /usr/bin/ruptime -u
+```
+
+- with systemd
+
+```
+/etc/systemd/system/ruptime.service
+[Unit]
+Description=ruptime
+After=network.target
+Documentation=https://github.com/alexmyczko/ruptime/
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ruptime -u
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+/etc/systemd/system/ruptime.timer
+[Unit]
+Description=ruptime
+
+[Timer]
+OnBootSec=3m
+
+[Install]
+WantedBy=basic.target
 ```
 
 ## References

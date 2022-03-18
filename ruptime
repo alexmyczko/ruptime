@@ -22,9 +22,22 @@ if [ "${SERVER}x" = "x" ]; then echo "SERVER not set"; exit 1; fi
 if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
+d=$(basename "$0")
 if [ "${1}x" = "-ux" ]; then
-    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
-    echo ruptime "$u" | nc "$SERVER" "$PORT"
+    k=$(eval "$HOSTNAMECMD")
+    case "$d" in
+	runame)
+	    u=$(printf "%-28s %s\n" "$k" "`uname -srm`" | mcrypt -f "$KEY" -Fq | base64)
+	;;
+	ruptime)
+	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
+	;;
+	*)
+	    echo "PROTOCOL ERROR"
+	    exit 1
+	;;
+    esac
+    echo "$d $u" | nc "$SERVER" "$PORT"
     exit 0
 fi
 

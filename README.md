@@ -6,6 +6,24 @@ Historically the original ruptime [6] was using broadcast udp/513 [3] in a netwo
 Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffice and
 client server architecture.
 
+While it was
+- rcp (remote copy)
+- rexec (remote execution)
+- rlogin (remote login)
+- rsh (remote shell)
+- rstat
+- ruptime
+- rwho (remote who)
+
+It is now
+- ruptime (remote uptime)
+- runame (remote uname and OS/release)
+- rsw (remote software)
+- rhw (remote hardware, inventory)
+- rload (remote load of CPU/GPU/MEM/NET)
+- rbench (remote benchmark)
+- rboot (remote rebootable?)
+
 ## Never heard of ruptime, what does it look like?
 ```
 $ ruptime

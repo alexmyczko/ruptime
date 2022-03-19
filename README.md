@@ -3,7 +3,7 @@
 poor man’s ruptime
 
 Historically the original ruptime [6] was using broadcast udp/513 [3] in a network.
-Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffice and
+Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffic and
 client server architecture.
 
 While it was

@@ -8,9 +8,9 @@ So this is a test how many machines it can take.
 ## Never heard of ruptime, what does it look like?
 ```
 $ ruptime
-fish             up    4+21:27,  0 users,  load 0.22, 0.25, 0.25
-tuna             up    4+21:27,  0 users,  load 0.20, 0.25, 0.25
-dolphin          up   15+05:57,  0 users,  load 0.04, 0.08, 0.07
+fish.ocean.net      up    4+21:27  0 users  load 0.22 0.25 0.25
+tuna.ocean.net      up    4+21:27  0 users  load 0.20 0.30 0.42
+dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 ```
 
 ## Why would I want this?

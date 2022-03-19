@@ -16,13 +16,13 @@ While it was
 - rwho (remote who)
 
 It is now
-- ruptime (remote uptime)
-- runame (remote uname and OS/release)
-- rsw (remote software)
-- rhw (remote hardware, inventory)
-- rload (remote load of CPU/GPU/MEM/NET)
-- rbench (remote benchmark)
-- rboot (remote rebootable?)
+- ruptime (remote uptime) - the classic
+- runame (remote uname and OS/release) - keep track what OS/release you run
+- rsw (remote software) - what kind of package managers did sneak in
+- rhw (remote hardware, inventory) - what hardware do you have
+- rload (remote load of CPU/GPU/MEM/NET) - the current usage of hardware
+- rbench (remote benchmark) - comparable list of your hardware if you need something
+- rboot (remote rebootable?) - safety level for a reboot
 
 ## Never heard of ruptime, what does it look like?
 ```

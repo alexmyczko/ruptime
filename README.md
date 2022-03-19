@@ -39,6 +39,7 @@ dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 - you want to see what hosts are down
 - you want to see what hosts are not idle
 - you want to run something on all running hosts with `parallel`
+- get rid of non-standard/in-house solutions that do not scale or are cumbersome in some other way
 
 ## Plan
 

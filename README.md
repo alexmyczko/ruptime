@@ -2,8 +2,9 @@
 
 poor man’s ruptime
 
-Historically it is using broadcast udp/513 [3] in a network.
-So this is a test how many machines it can take.
+Historically the original ruptime [6] was using broadcast udp/513 [3] in a network.
+Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffice and
+client server architecture.
 
 ## Never heard of ruptime, what does it look like?
 ```
@@ -112,3 +113,5 @@ WantedBy=basic.target
 [4] https://www.gkogan.co/blog/simple-systems/
 
 [5] https://kill-9.xyz/harmful/software/systemd
+
+[6] https://en.wikipedia.org/wiki/Berkeley_r-commands

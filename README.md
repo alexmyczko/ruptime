@@ -1,4 +1,4 @@
-![ruptime](ruptime.png?raw=true "ruptime")
+![ruptime](.ruptime.png?raw=true "ruptime")
 
 poor man’s ruptime
 

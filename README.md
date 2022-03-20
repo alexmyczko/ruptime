@@ -122,7 +122,6 @@ OnBootSec=3m
 WantedBy=basic.target
 ```
 
-## References
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands
 
 [^2]: https://manpages.debian.org/unstable/manpages/services.5.en.html

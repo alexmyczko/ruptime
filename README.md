@@ -2,7 +2,7 @@
 
 poor man’s ruptime
 
-Historically the original ruptime [6] was using broadcast udp/513 [3] in a network.
+Historically the original ruptime[^1] was using broadcast udp/513[^2] in a network.
 Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffic and
 client-server architecture.
 
@@ -33,7 +33,7 @@ dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 ```
 
 ## Why would I want this?
-- it's simple [4]
+- it's simple[^5]
 - monitoring systems have no or not very useful CLI tools
 - you don't want to manually keep a list of hosts
 - you want to see what hosts are down
@@ -48,7 +48,7 @@ dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 - replace `mcrypt` with `openssl`
 
 ## Configuration
-The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds) [1] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL) [2].
+The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].
 ```
 SERVER=wedonthaveaprivacyproblem.com
 PORT=51300
@@ -83,7 +83,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 
 ## Starting it
 - FreeBSD: rc.d
-- Linux: daemon, init.d, cron @reboot, systemd [5]
+- Linux: daemon, init.d, cron @reboot, systemd[^6]
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows (not sure if they still have `net start`, haven't seen it since NT 4)
 
@@ -123,14 +123,14 @@ WantedBy=basic.target
 ```
 
 ## References
-[1] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
+[^1] https://en.wikipedia.org/wiki/Berkeley_r-commands
 
-[2] https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
+[^2] https://manpages.debian.org/unstable/manpages/services.5.en.html
 
-[3] https://manpages.debian.org/unstable/manpages/services.5.en.html
+[^3] https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 
-[4] https://www.gkogan.co/blog/simple-systems/
+[^4] https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
 
-[5] https://kill-9.xyz/harmful/software/systemd
+[^5] https://www.gkogan.co/blog/simple-systems/
 
-[6] https://en.wikipedia.org/wiki/Berkeley_r-commands
+[^6] https://kill-9.xyz/harmful/software/systemd

@@ -1,0 +1,11 @@
+[Unit]
+Description=ruptime
+After=network.target
+Documentation=https://github.com/alexmyczko/ruptime/
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ruptime -u
+
+[Install]
+WantedBy=multi-user.target

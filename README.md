@@ -90,36 +90,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 - without systemd
 ```
 crontab -l
-*/3 * * * * /usr/bin/ruptime -u
-```
-
-- with systemd
-
-```
-/etc/systemd/system/ruptime.service
-[Unit]
-Description=ruptime
-After=network.target
-Documentation=https://github.com/alexmyczko/ruptime/
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/ruptime -u
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```
-/etc/systemd/system/ruptime.timer
-[Unit]
-Description=ruptime
-
-[Timer]
-OnBootSec=3m
-
-[Install]
-WantedBy=basic.target
+*/1 * * * * /usr/bin/ruptime -u
 ```
 
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands

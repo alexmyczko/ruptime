@@ -94,13 +94,8 @@ crontab -l
 ```
 
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands
-
 [^2]: https://manpages.debian.org/unstable/manpages/services.5.en.html
-
 [^3]: https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
-
 [^4]: https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
-
 [^5]: https://www.gkogan.co/blog/simple-systems/
-
 [^6]: https://kill-9.xyz/harmful/software/systemd

@@ -42,7 +42,8 @@ if [ "${1}x" = "-ux" ]; then
 	;;
 	rload)
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
-	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64)
+	    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
+	    u=$(printf "%-28s %s %s\n" "$k" "$s" "$m" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	*)
 	    echo "PROTOCOL ERROR"

@@ -96,6 +96,14 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ```
 crontab -l
 */1 * * * * /usr/bin/ruptime -u
+*/3 * * * * /usr/bin/rload -u
+*/5 * * * * /usr/bin/rboot -u
+* */1 * * * /usr/bin/rdisk -u
+@reboot     /usr/bin/rbench -u
+@reboot     /usr/bin/runame -u
+@reboot     /usr/bin/rsw -u
+@reboot     /usr/bin/rhw -u
+@reboot     /usr/bin/rnet -u
 ```
 
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands

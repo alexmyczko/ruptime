@@ -3,8 +3,11 @@
 poor man’s ruptime
 
 Historically the original ruptime[^1] was using broadcast udp/513[^2] in a network.
-Since it's not 1982 but 2022 today, here's a version for multiple networks with encrypted traffic and
+Since it's not 1982 anymore, but 2022 today, here's a version for multiple networks with encrypted traffic and
 client-server architecture.
+
+You will automatically get instant list of hosts (down or up), inventory of hardware, software overview,
+comparable list of benchmark results.
 
 While it was
 - rcp (remote copy)
@@ -23,6 +26,8 @@ It is now
 - rload (remote load of CPU/GPU/MEM/NET) - the current usage of hardware
 - rbench (remote benchmark) - comparable list of your hardware if you need something
 - rboot (remote rebootable?) - safety level for a reboot
+- rnet (remote network) - networking details (interface name, connection speed)
+- rdisk (remote disk) - overview of local disks and their speeds
 
 ## Never heard of ruptime, what does it look like?
 ```

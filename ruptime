@@ -40,6 +40,24 @@ if [ "${1}x" = "-ux" ]; then
 	ruptime)
 	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
 	;;
+	rsw)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
+	rhw)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
+	rbench)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
+	rboot)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
+	rnet)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
+	rdisk)
+	    echo "NOT IMPLEMENTED YET"; exit 1
+	;;
 	rload)
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
 	    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))

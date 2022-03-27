@@ -37,6 +37,12 @@ tuna.ocean.net      up    4+21:27  0 users  load 0.20 0.30 0.42
 dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 ```
 
+```
+$ runame
+fish.ocean.net               Linux 5.15.0-17-generic x86_64, Ubuntu 22.04 jammy
+tuna.ocean.net               Darwin 21.1.0 arm64, macOS 12.0.1 21A559
+```
+
 ## Why would I want this?
 - it's simple[^5]
 - monitoring systems have no or not very useful CLI tools

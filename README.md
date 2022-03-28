@@ -30,6 +30,11 @@ It is now
 - rdisk (remote disk) - overview of local disks and their speeds
 
 ## Never heard of ruptime, what does it look like?
+
+The output shows how long the system has been up, the number of  users currently on the
+system, and the load averages. The load average numbers give the number of jobs in the
+run queue averaged over 1, 5 and 15 minutes.
+
 ```
 $ ruptime # FQDN   State Uptime    Users    Load Averages 1' 5' 15'
 fish.ocean.net      up    4+21:27  0 users  load 0.22 0.25 0.25
@@ -47,6 +52,14 @@ tuna.ocean.net               Darwin 21.1.0 arm64, macOS 12.0.1 21A559
 $ rload # FQDN               CPU %  MEM %
 whale.ocean.net               19.00   3.37
 ```
+
+## Command line options
+
+```
+-u   Upload information to the server
+```
+
+No option queries the server for the information.
 
 ## Why would I want this?
 - it's simple[^5]

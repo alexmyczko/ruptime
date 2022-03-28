@@ -28,10 +28,10 @@ color () {
 }
 
 # logged in users
-echo -n "Users: "
+echo -n "Users:"
 liun=$(who |grep -v root | awk '{print $1}' |sort -u|wc -l)
 color "$liun"
-echo -e "$(echo $result)"
+echo -ne "$(echo $result) "
 #who |grep -v root | awk '{print $1}' |sort -u | while read a; do
 #   echo "${f}${a}"
 #done
@@ -41,7 +41,7 @@ r=$((r + liun))
 echo -n "screen/tmux:"
 sotn=$(ps -ef |grep 'screen\|tmux' |grep -v grep | awk '{print $1 " " $NF}' |sort -u|wc -l)
 color "$sotn"
-echo -e "$(echo $result)"
+echo -ne "$(echo $result) "
 #ps -ef |grep 'screen\|tmux' |grep -v grep | awk '{$2=$3=$4=$5=$6=$7="";print}' |sort -u| while read a b; do
 #   echo "${f}${a} [${b}]"
 #done

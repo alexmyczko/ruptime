@@ -22,9 +22,9 @@ It is now
 - ruptime (remote uptime) - the classic
 - runame (remote uname and OS/release) - keep track what OS/release you run
 - rsw (remote software) - what kind of package managers did sneak in
-- rhw (remote hardware, inventory) - what hardware do you have
-- rload (remote load of CPU/GPU/MEM/NET) - the current usage of hardware
-- rbench (remote benchmark) - comparable list of your hardware if you need something
+- rhw (remote hardware, inventory) - what hardware you have
+- rload (remote load of CPU/GPU/MEM/NET) - usage of hardware
+- rbench (remote benchmark) - comparable list of your hardware
 - rboot (remote rebootable?) - safety level for a reboot
 - rnet (remote network) - networking details (interface name, connection speed)
 - rdisk (remote disk) - overview of local disks and their speeds

@@ -41,19 +41,23 @@ if [ "${1}x" = "-ux" ]; then
 	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rsw)
+	    # /usr/lib/ruptime/sw
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rhw)
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rbench)
+	    # /usr/lib/ruptime/benchmark
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rboot)
+	    # /usr/lib/ruptime/chkreboot
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rnet)
-	    echo "NOT IMPLEMENTED YET"; exit 1
+	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed s,:.*,, |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,")
+	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rdisk)
 	    echo "NOT IMPLEMENTED YET"; exit 1

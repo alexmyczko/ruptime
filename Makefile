@@ -17,8 +17,8 @@ install:
 
 install-config:
 	if test ! -d $(DESTDIR)/$(CONFDIR) ; then mkdir -p $(DESTDIR)/$(CONFDIR) ; fi
-	install -m 600 ruptime.conf $(DESTDIR)/etc
-	install -m 600 ruptime.key $(DESTDIR)/etc
+	install -m 600 etc/ruptime.conf $(DESTDIR)/etc
+	install -m 600 etc/ruptime.key $(DESTDIR)/etc
 
 uninstall:
 	rm -f $(DESTDIR)/$(BINDIR)/ruptime

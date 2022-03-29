@@ -59,12 +59,18 @@ if [ "${1}x" = "-ux" ] | [ "${1}x" = "-dx" ]; then
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rbench)
-	    # /usr/lib/ruptime/benchmark
-	    echo "NOT IMPLEMENTED YET"; exit 1
+	    if [ "${1}x" = "-dx" ]; then
+		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`"; exit 0
+	    else
+		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`" | mcrypt -f "$KEY" -Fq | base64)
+	    fi
 	;;
 	rboot)
-	    # /usr/lib/ruptime/chkreboot
-	    echo "NOT IMPLEMENTED YET"; exit 1
+	    if [ "${1}x" = "-dx" ]; then
+		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`"; exit 0
+	    else
+		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`" | mcrypt -f "$KEY" -Fq | base64)
+	    fi
 	;;
 	rnet)
 	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed s,:.*,, |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,")

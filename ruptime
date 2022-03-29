@@ -23,7 +23,7 @@ if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
 d=$(basename "$0")
-if [ "${1}x" = "-ux" ]; then
+if [ "${1}x" = "-ux" ] | [ "${1}x" = "-dx" ]; then
     k=$(eval "$HOSTNAMECMD")
     case "$d" in
 	runame)
@@ -35,14 +35,25 @@ if [ "${1}x" = "-ux" ]; then
 		    s=$(echo $(sw_vers 2>/dev/null | awk '{print $NF}'))
 		;;
 	    esac
-	    u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | mcrypt -f "$KEY" -Fq | base64)
+	    if [ "${1}x" = "-dx" ]; then
+		printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s"; exit 0
+	    else
+	    	u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | mcrypt -f "$KEY" -Fq | base64)
+	    fi
 	;;
 	ruptime)
-	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
+	    if [ "${1}x" = "-dx" ]; then
+	        uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}'; exit 0
+	    else
+	        u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
+	    fi
 	;;
 	rsw)
-	    # /usr/lib/ruptime/sw
-	    echo "NOT IMPLEMENTED YET"; exit 1
+	    if [ "${1}x" = "-dx" ]; then
+		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`"; exit 0
+	    else
+		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`" | mcrypt -f "$KEY" -Fq | base64)
+	    fi
 	;;
 	rhw)
 	    echo "NOT IMPLEMENTED YET"; exit 1

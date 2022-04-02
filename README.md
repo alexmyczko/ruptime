@@ -130,6 +130,15 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 @reboot      /usr/bin/rnet -u
 ```
 
+## Special Files
+
+https://manpages.debian.org/buster/manpages/nologin.5.en.html
+https://manpages.debian.org/unstable/manpages/issue.5.en.html
+https://manpages.debian.org/buster/manpages/motd.5.en.html
+https://manpages.debian.org/buster/proftpd-basic/ftpusers.5.en.html
+https://manpages.debian.org/buster/cron/crontab.1.en.html references cron.allow cron.disallow
+https://manpages.debian.org/buster/login/login.1.en.html
+
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands
 [^2]: https://manpages.debian.org/unstable/manpages/services.5.en.html
 [^3]: https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/

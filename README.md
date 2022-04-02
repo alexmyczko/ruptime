@@ -115,7 +115,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ```
 
 ## Requirements
-- Client: `nc` `xz` `bc` `memtester` `mcrypt`
+- Client: `nc` `xz` `bc` `memtester` `lm-sensors` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
 - Optionals: `pen` `trickle` `timeout`
 

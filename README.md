@@ -53,6 +53,21 @@ $ rload # FQDN               CPU %  MEM %
 whale.ocean.net               19.00   3.37
 ```
 
+```
+$ rsw # FQDN                 pkg number...
+seahorse.ocean.net           dpkg 7243 rpm 0 pip3 393 
+```
+
+```
+$ rboot # FQDN               users    screen/tmux    cpu load
+orca.ocean.net               Users: 2 screen/tmux: 1 CPU: 5
+```
+
+```
+$ rbench # FQDN              Memory   Total CPU      Cores
+orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
+```
+
 ## Command line options
 
 ```

@@ -23,7 +23,18 @@ if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
 d=$(basename "$0")
-if [ "${1}x" = "-ux" ] | [ "${1}x" = "-dx" ]; then
+if [ "${1}x" = "-vx" ]; then
+    cat << INFO
+[0m[91m▗[0m[91m▆[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[91m▆[0m[91m▖[0m[7m[91m▏[0m[7m[91m [0m[91m▌[0m[7m[91m [0m[7m[91m [0m[91m▍[0m [0m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[91m▏[0m[91m▄[0m[7m[91m⎺[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m⎺[0m[91m▄[0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m┃[0m[7m[91m [0m[7m[91m [0m[91m▏[0m[91m▗[0m[91m▆[0m[7m[91m⎺[0m[7m[91m [0m[7m[91m [0m[91m▆[0m[91m▄[0m[91m▆[0m[7m[91m⎺[0m[7m[91m [0m[7m[91m [0m[91m▆[0m[91m▃[0m [0m[31m▗[0m[91m▅[0m[7m[91m⎺[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m⎺[0m[91m▅[0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[7m[91m┃[0m[7m[91m [0m[7m[91m [0m
+[0m[7m[91m [0m[7m[91m [0m[91m▍[0m [0m[91m▂[0m[91m▃[0m[91m▃[0m[91m▃[0m[91m▃[0m[31m[101m▏[0m[7m[91m [0m[91m▋[0m[7m[91m▃[0m[7m[91m▃[0m[91m▘[0m[7m[91m [0m[7m[91m [0m[91m▍[0m [0m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m[91m⎺[0m [0m [0m [0m [0m [0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[91m▎[0m [0m [0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[91m▎[0m [0m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[7m[91m▅[0m[91m⎺[0m[7m[91m▆[0m[7m[91m▖[0m[7m[91m [0m[7m[91m [0m[7m[91m▆[0m[91m⎺[0m[7m[91m▆[0m[31m[101m▏[0m[7m[91m [0m[91m▌[0m[7m[91m▎[0m[7m[91m [0m[7m[91m▗[0m[91m▗[0m[91m▄[0m[91m▄[0m[91m▄[0m[91m▄[0m[91m▄[0m[91m▄[0m[7m[91m [0m[7m[91m [0m[91m▎[0m[7m[91m▃[0m[7m[91m▃[0m[91m▝[0m[7m[91m▃[0m[7m[91m▃[0m
+[0m[7m[91m [0m[7m[91m [0m[91m▍[0m[31m[101m⎺[0m[7m[91m [0m[7m[91m▃[0m[7m[91m▃[0m[7m[91m▃[0m[7m[91m▃[0m[7m[91m▃[0m[7m[91m▅[0m [0m [0m [0m [0m[7m[91m▏[0m[7m[91m [0m[7m[91m▝[0m [0m [0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m[7m[91m▌[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m⎽[0m[7m[91m▄[0m [0m [0m [0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[91m▎[0m [0m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m [0m [0m [0m[7m[91m▌[0m[7m[91m [0m[91m▊[0m [0m [0m [0m[7m[91m▎[0m[7m[91m [0m[91m▋[0m[7m[91m▎[0m[7m[91m [0m[7m[91m▝[0m[91m▝[0m[7m[91m▄[0m[7m[91m▄[0m[7m[91m▄[0m[7m[91m▄[0m[7m[91m▄[0m[7m[91m▄[0m[7m[91m▅[0m[31m⎺[0m [0m [0m [0m [0m [0m [0m
+[0m[7m[91m [0m[7m[91m [0m[91m▍[0m[7m[91m▃[0m[7m[91m⎽[0m[7m[91m⎺[0m[7m[91m⎺[0m[7m[91m⎺[0m[7m[91m⎺[0m[7m[91m⎺[0m[7m[91m⎺[0m[91m▋[0m [0m [0m [0m [0m[7m[91m▃[0m[7m[91m⎽[0m[7m[91m [0m[7m[91m [0m[7m[91m⎽[0m[7m[91m▃[0m[31m▘[0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m[7m[91m▉[0m[7m[91m [0m[7m[91m [0m[91m▎[0m [0m [0m[7m[91m▊[0m[7m[91m [0m[7m[91m [0m[7m[91m▋[0m[7m[91m [0m[7m[91m [0m [0m [0m [0m[7m[91m▌[0m[7m[91m [0m[91m▊[0m [0m [0m [0m[7m[91m▎[0m[7m[91m [0m[91m▋[0m[31m▝[0m[7m[91m▃[0m[7m[91m⎽[0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[7m[91m [0m[91m▍[0m [0m [0m [0m [0m [0m
+THIS IS THE UNLICENSED VERSION. PLEASE BUY. US@WEDONTHAVEAPRIVACYPROBLEM.COM
+VERSION 1.1 (FREE PLAN)
+INFO
+    exit 0
+fi
+if [ "${1}x" = "-ux" ]; then
     k=$(eval "$HOSTNAMECMD")
     case "$d" in
 	runame)
@@ -35,45 +46,25 @@ if [ "${1}x" = "-ux" ] | [ "${1}x" = "-dx" ]; then
 		    s=$(echo $(sw_vers 2>/dev/null | awk '{print $NF}'))
 		;;
 	    esac
-	    if [ "${1}x" = "-dx" ]; then
-		printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s"; exit 0
-	    else
-	    	u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	ruptime)
-	    if [ "${1}x" = "-dx" ]; then
-	        uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}'; exit 0
-	    else
-	        u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rsw)
-	    if [ "${1}x" = "-dx" ]; then
-		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`"; exit 0
-	    else
-		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`" | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rhw)
 	    echo "NOT IMPLEMENTED YET"; exit 1
 	;;
 	rbench)
-	    if [ "${1}x" = "-dx" ]; then
-		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`"; exit 0
-	    else
-		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`" | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rboot)
-	    if [ "${1}x" = "-dx" ]; then
-		printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`"; exit 0
-	    else
-		u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`" | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rnet)
-	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed s,:.*,, |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,")
+	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,")
 	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	rdisk)

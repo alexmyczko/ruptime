@@ -86,12 +86,6 @@ No option queries the server for the information.
 - you want to run something on all running hosts with `parallel`
 - get rid of non-standard/in-house solutions that do not scale or are cumbersome in some other way
 
-## Plan
-
-- allow to monitor custom variables
-- web presentation/views
-- replace `mcrypt` with `openssl`
-
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].
 ```

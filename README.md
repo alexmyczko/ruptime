@@ -72,6 +72,7 @@ orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 
 ```
 -u   Upload information to the server
+-v   Print license/version and quit
 ```
 
 No option queries the server for the information.

@@ -129,7 +129,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 - without systemd
 ```
 # crontab -l
-*/3 * * * *  /usr/bin/ruptime -u
+*/1 * * * *  /usr/bin/ruptime -u
 */3 * * * *  /usr/bin/rload -u
 */15 * * * * /usr/bin/rboot -u
 @reboot      /usr/bin/rdisk -u

@@ -1,10 +1,10 @@
 # ruptime
-*/1 * * * * root /usr/bin/ruptime -u
-*/3 * * * * root /usr/bin/rload -u
-*/5 * * * * root /usr/bin/rboot -u
-@reboot     root /usr/bin/rdisk -u
-@reboot     root /usr/bin/rbench -u
-@reboot     root /usr/bin/runame -u
-@reboot     root /usr/bin/rsw -u
-@reboot     root /usr/bin/rhw -u
-@reboot     root /usr/bin/rnet -u
+*/1 * * * *  root /usr/bin/ruptime -u
+*/3 * * * *  root /usr/bin/rload -u
+*/15 * * * * root /usr/bin/rboot -u
+@reboot      root /usr/bin/rdisk -u
+@reboot      root /usr/bin/rbench -u
+@reboot      root /usr/bin/runame -u
+@reboot      root /usr/bin/rsw -u
+@reboot      root /usr/bin/rhw -u
+@reboot      root /usr/bin/rnet -u

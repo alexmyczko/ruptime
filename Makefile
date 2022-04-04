@@ -1,6 +1,6 @@
 BINDIR=/usr/bin
 MANDIR=/usr/share/man
-CONFDIR=/etc
+CONFDIR=/etc/ruptime
 VERSION=1.1
 
 all:
@@ -11,19 +11,18 @@ all:
 
 install:
 	if test ! -d $(DESTDIR)/$(BINDIR) ; then mkdir -p $(DESTDIR)/$(BINDIR) ; fi
-	install -m 755 ruptime $(DESTDIR)/$(BINDIR)/
+	install -m 755 r* $(DESTDIR)/$(BINDIR)/
 #	if test ! -d $(MANDIR)/man1 ; then mkdir -p $(MANDIR)/man1; fi
 #	install -c -m 644 ruptime.1.gz $(MANDIR)/man1/
 
 install-config:
 	if test ! -d $(DESTDIR)/$(CONFDIR) ; then mkdir -p $(DESTDIR)/$(CONFDIR) ; fi
-	install -m 600 etc/ruptime.conf $(DESTDIR)/etc
-	install -m 600 etc/ruptime.key $(DESTDIR)/etc
+	install -m 600 etc/ruptime.* $(DESTDIR)/$(CONFDIR)
 
 uninstall:
 	rm -f $(DESTDIR)/$(BINDIR)/ruptime
 #	rm -f $(MANDIR)/man1/ruptime.1.gz
 
 uninstall-config:
-	rm -f $(DESTDIR)/etc/ruptime.conf
-	rm -f $(DESTDIR)/etc/ruptime.key
+	rm -f $(DESTDIR)/$(CONFDIR)/ruptime.conf
+	rm -f $(DESTDIR)/$(CONFDIR)/ruptime.key

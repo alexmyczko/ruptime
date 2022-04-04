@@ -53,6 +53,21 @@ $ rload # FQDN               CPU %  MEM %
 whale.ocean.net               19.00   3.37
 ```
 
+```
+$ rsw # FQDN                 pkg number...
+seahorse.ocean.net           dpkg 7243 rpm 0 pip3 393 
+```
+
+```
+$ rboot # FQDN               users    screen/tmux    cpu load
+orca.ocean.net               Users: 2 screen/tmux: 1 CPU: 5
+```
+
+```
+$ rbench # FQDN              Memory   Total CPU      Cores
+orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
+```
+
 ## Command line options
 
 ```
@@ -100,7 +115,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ```
 
 ## Requirements
-- Client: `nc` `xz` `bc` `memtester` `mcrypt`
+- Client: `nc` `xz` `bc` `memtester` `lm-sensors` `mcrypt`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
 - Optionals: `pen` `trickle` `timeout`
 
@@ -119,16 +134,25 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 - without systemd
 ```
 # crontab -l
-*/1 * * * * /usr/bin/ruptime -u
-*/3 * * * * /usr/bin/rload -u
-*/5 * * * * /usr/bin/rboot -u
-* */1 * * * /usr/bin/rdisk -u
-@reboot     /usr/bin/rbench -u
-@reboot     /usr/bin/runame -u
-@reboot     /usr/bin/rsw -u
-@reboot     /usr/bin/rhw -u
-@reboot     /usr/bin/rnet -u
+*/3 * * * *  /usr/bin/ruptime -u
+*/3 * * * *  /usr/bin/rload -u
+*/15 * * * * /usr/bin/rboot -u
+@reboot      /usr/bin/rdisk -u
+@reboot      /usr/bin/rbench -u
+@reboot      /usr/bin/runame -u
+@reboot      /usr/bin/rsw -u
+@reboot      /usr/bin/rhw -u
+@reboot      /usr/bin/rnet -u
 ```
+
+## Special Files
+
+- https://manpages.debian.org/unstable/manpages/nologin.5.en.html
+- https://manpages.debian.org/unstable/manpages/issue.5.en.html
+- https://manpages.debian.org/unstable/manpages/motd.5.en.html
+- https://manpages.debian.org/unstable/proftpd-basic/ftpusers.5.en.html
+- https://manpages.debian.org/unstable/cron/crontab.1.en.html references cron.allow cron.disallow
+- https://manpages.debian.org/unstable/login/login.1.en.html
 
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands
 [^2]: https://manpages.debian.org/unstable/manpages/services.5.en.html

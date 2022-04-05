@@ -34,6 +34,30 @@ VERSION 1.1 (FREE PLAN)
 INFO
     exit 0
 fi
+if [ "${1}x" = "-ix" ]; then
+    # install the software and symlinks
+    if [ 0 -eq `id -u` ]; then
+	cp ruptime /usr/bin
+	cd /usr/bin && (
+	    ln -s ruptime rsw
+	    ln -s ruptime rhw
+	    ln -s ruptime runame
+	    ln -s ruptime rbench
+	    ln -s ruptime rboot
+	    ln -s ruptime rdisk
+	    ln -s ruptime rload
+	    ln -s ruptime rnet
+	)
+	mkdir -p /etc/ruptime
+	cp etc/r* /etc/ruptime
+	mkdir -p /usr/lib/ruptime
+	cp ext/* /usr/lib/ruptime
+	cp etc/cron.d/ruptime /etc/cron.d/ruptime
+    else
+	echo "MUST BE ROOT."
+	exit 1
+    fi
+fi
 if [ "${1}x" = "-ux" ]; then
     k=$(eval "$HOSTNAMECMD")
     case "$d" in
@@ -72,12 +96,17 @@ if [ "${1}x" = "-ux" ]; then
 	;;
 	rload)
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
-	    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
-	    if [ "${1}x" = "-dx" ]; then
-		printf "%-28s %s %s\n" "$k" "$s" "$m"
-	    else
-		u=$(printf "%-28s %s %s\n" "$k" "$s" "$m" | mcrypt -f "$KEY" -Fq | base64)
-	    fi
+	    case "$(uname -s)" in
+		Linux)
+		    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
+		;;
+		Darwin)
+		    total=$(sysctl hw.memsize | awk '{print $NF}')
+		    used=$(top -l 1 | grep PhysMem: |sed "s/M//g"|awk '{print $2*1024*1024}')
+		    m=$(printf "%6.2f\n" $(echo Mem: $total $used |awk '{print 100*$3/$2}'))
+		;;
+	    esac
+	    u=$(printf "%-28s %s %s\n" "$k" "$s" "$m" | mcrypt -f "$KEY" -Fq | base64)
 	;;
 	*)
 	    echo "PROTOCOL ERROR"

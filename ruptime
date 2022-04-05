@@ -38,21 +38,22 @@ if [ "${1}x" = "-ix" ]; then
     # install the software and symlinks
     if [ 0 -eq `id -u` ]; then
 	cp ruptime /usr/bin
-	cd /usr/bin && (
-	    ln -s ruptime rsw
-	    ln -s ruptime rhw
-	    ln -s ruptime runame
-	    ln -s ruptime rbench
-	    ln -s ruptime rboot
-	    ln -s ruptime rdisk
-	    ln -s ruptime rload
-	    ln -s ruptime rnet
-	)
 	mkdir -p /etc/ruptime
-	cp etc/r* /etc/ruptime
+	cp etc/ruptime.conf etc/ruptime.key /etc/ruptime/
 	mkdir -p /usr/lib/ruptime
 	cp ext/* /usr/lib/ruptime
 	cp etc/cron.d/ruptime /etc/cron.d/ruptime
+	cd /usr/bin && (
+	    ln -sf ruptime rsw
+	    ln -sf ruptime rhw
+	    ln -sf ruptime runame
+	    ln -sf ruptime rbench
+	    ln -sf ruptime rboot
+	    ln -sf ruptime rdisk
+	    ln -sf ruptime rload
+	    ln -sf ruptime rnet
+	)
+	exit 0
     else
 	echo "MUST BE ROOT."
 	exit 1

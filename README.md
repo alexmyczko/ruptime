@@ -71,6 +71,7 @@ orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 ## Command line options
 
 ```
+-i   Install the software
 -u   Upload information to the server
 -v   Print license/version and quit
 ```

@@ -1,20 +1,5 @@
 #!/bin/bash
-
-# exclue cpan and build them with native tools like
-# dh-make-perl --build --cpan CPAN::Name
-
-# maybe add nix packaging, stuck in debian new queue
-
-# spack packaging
-# http://spack.readthedocs.io/en/latest/tutorial_packaging.html#packaging-tutorial
-
-# should do the same with pip using pypi2deb
-# py2dsp pythonpkg
-
-# module -V
-# pip* -V
-
-for a in dpkg rpm nix snap spack 0install flatpak opam module pip2 pip3 brew zypper; do
+for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
     which $a &>/dev/null && (
 	case $a in
 	    dpkg)
@@ -25,9 +10,6 @@ for a in dpkg rpm nix snap spack 0install flatpak opam module pip2 pip3 brew zyp
 	    rpm)
 		# rpm --version | awk '{print $NF}'
 		num=`rpm -qa | wc -l`
-	    ;;
-	    nix)
-	    	num=`echo ?`
 	    ;;
 	    brew)
 		num=`brew list| wc -l`
@@ -50,10 +32,6 @@ for a in dpkg rpm nix snap spack 0install flatpak opam module pip2 pip3 brew zyp
 	    zypper)
 	    	num=`zypper search --installed-only | grep package$ | wc -l`
 	    ;;
-	    # 0install is braindead
-	    #0install)
-	    #	num=`0install list |wc -l`
-	    #;;
 	    *)
 		num="n/a"
 	    ;;

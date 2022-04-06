@@ -3,8 +3,6 @@
 # small CPU/MEM/DSK/NET benchmark for linux/macos
 # alex@aiei.ch
 
-# for cpu, openssl speed is also nice
-
 # check if called binaries are available
 for a in date memtester bc dd sync printf; do
     which $a >/dev/null
@@ -34,22 +32,3 @@ start=$($d +%s.%N)
 /bin/echo "scale=3000;4*a(1)" | bc -l &>/dev/null
 end=$($d +%s.%N)
 printf "%.2f %s\n" $(echo $end - $start | bc) $cores
-
-# DISK 6.4 GB
-#echo -n "DSK "
-#start=$($d +%s.%N)
-#l=$(pwd)
-#dd=M
-#if [ $(uname) = Darwin ]; then dd=m; fi
-#if [ -d /scratch ]; then l=/scratch; fi
-#which diskutil >/dev/null && disk=$(diskutil info /dev/disk0|grep "Disk Size:" | awk '{print $3}')
-#which diskutil >/dev/null || disk=$(df -BG $l | tail -1 | awk '{print $2}'| sed s,G,,)
-# check if there's enough diskspace, compare value above with num
-#freemb=`df -m $l | tail -1 | awk '{print $4}'`
-#if [ 6400 -gt $freemb ]; then
-#    echo 6.4 GB diskspace needed, but only $freemb MB found.
-#    exit 1
-#fi
-#sync;dd if=/dev/zero of=$l/_benchmark bs=64${dd} count=100 &>/dev/null;rm $l/_benchmark;sync
-#end=$($d +%s.%N)
-#printf "[%.2f\"/%.0f GB]\n" $(echo $end - $start | bc) $disk

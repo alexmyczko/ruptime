@@ -65,7 +65,7 @@ if [ "${1}x" = "-ux" ]; then
 	runame)
 	    case "$(uname -s)" in
 		Linux)
-		    s=$(echo $(lsb_release -a 2>/dev/null | grep -v ^Desc | awk '{print $NF}'))
+		    s=$(echo $(lsb_release -a 2>/dev/null | grep -v ^LSB | grep -v ^Desc | awk '{print $NF}'))
 		;;
 		Darwin)
 		    s=$(echo $(sw_vers 2>/dev/null | awk '{print $NF}'))

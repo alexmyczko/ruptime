@@ -77,7 +77,24 @@ if [ "${1}x" = "-ux" ]; then
 	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rsw)
-	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/sw`" | mcrypt -f "$KEY" -Fq | base64 -w0)
+rsw=$(for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
+    which $a &>/dev/null && (
+	case $a in
+	  dpkg) num=`dpkg -l |grep ^ii |wc -l`;;
+	  rpm) num=`rpm -qa | wc -l`;;
+          brew) num=`brew list| wc -l`;;
+	  pip2) num=`pip2 list 2>/dev/null | wc -l`;;
+	  pip3) num=`pip3 list 2>/dev/null | wc -l`;;
+	  spack) num=`spack find 2>/dev/null |wc -l`;;
+	  snap) num=`snap list |sed 1d |wc -l`;;
+	  flatpak) num=`flatpak list | wc -l`;;
+	  zypper) num=`zypper search --installed-only | grep package$ | wc -l`;;
+	  *) num="n/a";;
+	esac
+	echo -ne "$a $(echo $num) "
+    ) #|| echo "$a not found..."
+done)
+	    u=$(printf "%-28s %s\n" "$k" "$rsw" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rhw)
 	    echo "NOT IMPLEMENTED YET"; exit 1

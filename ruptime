@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -f "$HOME"/.ruptime ]; then
     . "$HOME"/.ruptime
@@ -99,6 +99,7 @@ if [ "${1}x" = "-ux" ]; then
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
 	    case "$(uname -s)" in
 		Linux)
+		    gpu=$(which nvidia-smi >/dev/null && nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv |sed 1d|sed "s/%,//g;s/MiB//g;s/,//g;s/  / /g" |datamash -t" " median 1-2 2>/dev/null | printf "%6.2f %6.2f\n")
 		    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
 		;;
 		Darwin)
@@ -107,7 +108,7 @@ if [ "${1}x" = "-ux" ]; then
 		    m=$(printf "%6.2f\n" $(echo Mem: $total $used |awk '{print 100*$3/$2}'))
 		;;
 	    esac
-	    u=$(printf "%-28s %s %s\n" "$k" "$s" "$m" | mcrypt -f "$KEY" -Fq | base64 -w0)
+	    u=$(printf "%-28s %s %s %s %s\n" "$k" "$s" "$m" "$gpu" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	*)
 	    echo "PROTOCOL ERROR"
@@ -120,5 +121,5 @@ fi
 
 d=$(basename "$0")
 (echo xz."$d") |
-(nc "$SERVER" "$PORT") |
+(nc -n "$SERVER" "$PORT") |
 (base64 -d | mcrypt -d -f "$KEY" -Fq | xz -d 2>/dev/null  || echo "NO DATA FOUND ($?)" 1>&2)

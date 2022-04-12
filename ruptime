@@ -106,7 +106,7 @@ done)
 	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rnet)
-	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown)
+	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)
 	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rdisk)

@@ -46,6 +46,8 @@ dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 $ runame # FQDN              Kernel Release Architecture, OS Version Code
 fish.ocean.net               Linux 5.15.0-17-generic x86_64, Ubuntu 22.04 jammy
 tuna.ocean.net               Darwin 21.1.0 arm64, macOS 12.0.1 21A559
+banana.ocean.net             Darwin 19.0.0 x86_64, MacOSX 10.15.1 19B77a
+lemon.ocean.net              GNU/kFreeBSD 11.4-0-amd64 x86_64, Debian unreleased sid
 ```
 
 ```

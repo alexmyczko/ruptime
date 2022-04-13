@@ -64,7 +64,7 @@ if [ "${1}x" = "-ux" ]; then
     case "$d" in
 	runame)
 	    case "$(uname -s)" in
-		Linux)
+		Linux|GNU/kFreeBSD)
 		    s=$(echo $(lsb_release -a 2>/dev/null | grep -v ^LSB | grep -v ^Desc | awk '{print $NF}'))
 		;;
 		Darwin)

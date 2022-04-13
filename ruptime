@@ -68,7 +68,7 @@ if [ "${1}x" = "-ux" ]; then
 		    s=$(echo $(lsb_release -a 2>/dev/null | grep -v ^LSB | grep -v ^Desc | awk '{print $NF}'))
 		;;
 		Darwin)
-		    s=$(echo $(sw_vers 2>/dev/null | awk '{print $NF}'))
+		    s=$(echo $(sw_vers 2>/dev/null | awk -v OFS="" '{$1=""}{print}'))
 		;;
 	    esac
 	    u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)

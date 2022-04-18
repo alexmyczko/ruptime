@@ -1,5 +1,8 @@
 #!/bin/bash
 
+d=$(basename "$0")
+pgrep "$d -u" >/dev/null && exit 0
+
 if [ -f "$HOME"/.ruptime ]; then
     . "$HOME"/.ruptime
 elif [ -f /etc/ruptime/ruptime.conf ]; then

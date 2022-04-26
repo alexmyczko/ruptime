@@ -134,13 +134,18 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 # crontab -l
 */1 * * * *  /usr/bin/ruptime -u
 */3 * * * *  /usr/bin/rload -u
-*/15 * * * * /usr/bin/rboot -u
 @reboot      /usr/bin/rdisk -u
 @reboot      /usr/bin/rbench -u
 @reboot      /usr/bin/runame -u
 @reboot      /usr/bin/rsw -u
 @reboot      /usr/bin/rhw -u
-@reboot      /usr/bin/rnet -u
+```
+
+Some metrics are not useful to have at regular intervals, nor at every boot, so collect them when needed, examples:
+
+```
+rboot -u
+rnet -u
 ```
 
 ## Special Files

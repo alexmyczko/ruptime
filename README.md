@@ -91,10 +91,14 @@ No option queries the server for the information.
 
 ## Real life examples
 Get an overview of your operating systems and releases
-`$ runame | awk '{i[$NF]++} END {for (n in i) print i[n] " " n}' | sort -nr`
+```
+$ runame | awk '{i[$NF]++} END {for (n in i) print i[n] " " n}' | sort -nr
+```
 
 Find hosts that are least used by CPU
-`rload | sort -k2n`
+```
+rload | sort -k2n
+```
 
 Update `rnet` output for all online hosts
 ```
@@ -102,10 +106,14 @@ for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$
 ```
 
 List all hosts sorted by network speed
-`rnet | sort -k3nr`
+```
+rnet | sort -k3nr
+```
 
 Combined `ruptime` and `rload` output
-`join <(ruptime) <(rload) | column -t`
+```
+join <(ruptime) <(rload) | column -t
+```
 
 Run something on all hosts having Ubuntu 22.04
 ```

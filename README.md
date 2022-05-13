@@ -37,17 +37,17 @@ run queue averaged over 1, 5 and 15 minutes.
 
 ```
 $ ruptime # FQDN   State Uptime    Users    Load Averages 1' 5' 15'
+dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 fish.ocean.net      up    4+21:27  0 users  load 0.22 0.25 0.25
 tuna.ocean.net      up    4+21:27  0 users  load 0.20 0.30 0.42
-dolphin.ocean.net   up   15+05:57  0 users  load 0.04 0.08 0.07
 ```
 
 ```
 $ runame # FQDN              Kernel Release Architecture, OS Version Code
-fish.ocean.net               Linux 5.15.0-17-generic x86_64, Ubuntu 22.04 jammy
-tuna.ocean.net               Darwin 21.1.0 arm64, macOS 12.0.1 21A559
 banana.ocean.net             Darwin 19.0.0 x86_64, MacOSX 10.15.1 19B77a
+fish.ocean.net               Linux 5.15.0-17-generic x86_64, Ubuntu 22.04 jammy
 lemon.ocean.net              GNU/kFreeBSD 11.4-0-amd64 x86_64, Debian unreleased sid
+tuna.ocean.net               Darwin 21.1.0 arm64, macOS 12.0.1 21A559
 ```
 
 ```
@@ -88,6 +88,31 @@ No option queries the server for the information.
 - you want to see what hosts are not idle
 - you want to run something on all running hosts with `parallel`
 - get rid of non-standard/in-house solutions that do not scale or are cumbersome in some other way
+
+## Real life examples
+Get an overview of your operating systems and releases
+`$ runame | awk '{i[$NF]++} END {for (n in i) print i[n] " " n}' | sort -nr`
+
+Find hosts that are least used by CPU
+`rload | sort -k2n`
+
+Update `rnet` output for all online hosts
+```
+for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done
+```
+
+List all hosts sorted by network speed
+`rnet | sort -k3nr`
+
+Combined `ruptime` and `rload` output
+`join <(ruptime) <(rload) | column -t`
+
+Run something on all hosts having Ubuntu 22.04
+```
+runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
+```
+
+Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].

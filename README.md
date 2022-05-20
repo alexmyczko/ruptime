@@ -167,8 +167,6 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 # crontab -l
 */1 * * * *  /usr/bin/ruptime -u
 */3 * * * *  /usr/bin/rload -u
-@reboot      /usr/bin/rdisk -u
-@reboot      /usr/bin/rbench -u
 @reboot      /usr/bin/runame -u
 @reboot      /usr/bin/rsw -u
 @reboot      /usr/bin/rhw -u
@@ -179,6 +177,13 @@ Some metrics are not useful to have at regular intervals, nor at every boot, so 
 ```
 rboot -u
 rnet -u
+```
+
+On first setup and hardware changes (memory upgrade, disks added):
+
+```
+rbench -u
+rdisk -u
 ```
 
 ## Special Files

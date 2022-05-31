@@ -97,27 +97,27 @@ $ runame | awk '{i[$NF]++} END {for (n in i) print i[n] " " n}' | sort -nr
 
 Find hosts that are least used by CPU
 ```
-rload | sort -k2n
+$ rload | sort -k2n
 ```
 
 Update `rnet` output for all online hosts
 ```
-for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done
+# for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done
 ```
 
 List all hosts sorted by network speed
 ```
-rnet | sort -k3nr
+$ rnet | sort -k3nr
 ```
 
 Combined `ruptime` and `rload` output
 ```
-join <(ruptime) <(rload) | column -t
+$ join <(ruptime) <(rload) | column -t
 ```
 
 Run something on all hosts having Ubuntu 22.04
 ```
-runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
+# runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
 ```
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.

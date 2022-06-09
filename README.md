@@ -17,6 +17,7 @@ While it was
 - rstat
 - ruptime
 - rwho (remote who)
+- rwall (remote wall)
 
 It is now
 - ruptime (remote uptime) - the classic

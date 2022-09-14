@@ -62,6 +62,13 @@ seahorse.ocean.net           dpkg 7243 rpm 0 pip3 393
 ```
 
 ```
+$ rhw # FQDN                 age        cores memory
+fish.ocean.net               2008/09/08 8 31
+lemon.ocean.net              2021/08/09 16 16
+banana.ocean.net             2019/12/10 64 377
+```
+
+```
 $ rboot # FQDN               users    screen/tmux    cpu load
 orca.ocean.net               Users: 2 screen/tmux: 1 CPU: 5
 ```

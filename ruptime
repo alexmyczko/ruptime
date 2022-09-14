@@ -103,7 +103,7 @@ done)
 	    biosdate=$(dmidecode -s bios-release-date | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
             cores=$(grep ^processor /proc/cpuinfo|wc -l)
-            u=$(printf "%-28s %s\n" "$k" "$biosdate $cores $mem" | mcrypt -f "$KEY" -Fq | base64)
+            u=$(printf "%-28s %s\n" "$k" "$biosdate $cores $mem" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rbench)
 	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`" | mcrypt -f "$KEY" -Fq | base64 -w0)

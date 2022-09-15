@@ -176,7 +176,7 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 
 ## Starting it
 - FreeBSD: rc.d
-- Linux: daemon, init.d, cron @reboot, systemd[^6]
+- Linux: daemon, init.d, cron @reboot, systemd
 - macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
 - Windows (not sure if they still have `net start`, haven't seen it since NT 4)
 
@@ -218,4 +218,4 @@ rhw -u
 [^3]: https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 [^4]: https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
 [^5]: https://www.gkogan.co/blog/simple-systems/
-[^6]: https://kill-9.xyz/harmful/software/systemd
+

@@ -128,6 +128,16 @@ Run something on all hosts having Ubuntu 22.04
 # runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
 ```
 
+Get total cores and memory of all your machines
+```
+$ rhw|awk '{print $3 " " $4}'|datamash -t" " sum 1-2
+```
+
+Average age of computers, oldest and newest (by BIOS date)
+```
+$ rhw|awk '{print $2}'|sed "s,/.*,,g"|datamash -t" " median 1 min 1 max 1
+```
+
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Configuration

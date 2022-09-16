@@ -82,7 +82,7 @@ orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 
 ```
 -i   Install the software
--u   Upload information to the server
+-u   Upload information to the server (NOTE: this might require root permission and get restricted to the root user in the future)
 -v   Print license/version and quit
 ```
 

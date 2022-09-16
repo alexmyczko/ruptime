@@ -43,19 +43,8 @@ if [ "${1}x" = "-ix" ]; then
 	cp ruptime /usr/bin
 	mkdir -p /etc/ruptime
 	cp etc/ruptime.conf etc/ruptime.key /etc/ruptime/
-	mkdir -p /usr/lib/ruptime
-	cp ext/* /usr/lib/ruptime
 	cp etc/cron.d/ruptime /etc/cron.d/ruptime
-	cd /usr/bin && (
-	    ln -sf ruptime rsw
-	    ln -sf ruptime rhw
-	    ln -sf ruptime runame
-	    ln -sf ruptime rbench
-	    ln -sf ruptime rboot
-	    ln -sf ruptime rdisk
-	    ln -sf ruptime rload
-	    ln -sf ruptime rnet
-	)
+	cd /usr/bin && for a in rsw rhw runame rbench rboot rdisk rload rnet; do ln -sf ruptime $a; done
 	exit 0
     else
 	echo "MUST BE ROOT."

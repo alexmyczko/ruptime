@@ -138,6 +138,11 @@ Average age of computers, oldest and newest (by BIOS date)
 $ rhw|awk '{print $2}'|sed "s,/.*,,g"|datamash -t" " median 1 min 1 max 1
 ```
 
+Right adjusted `rhw` output
+```
+$ rhw|column -t -R3,4
+```
+
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Configuration

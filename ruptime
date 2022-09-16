@@ -105,7 +105,8 @@ done)
 	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rdisk)
-	    echo "NOT IMPLEMENTED YET"; exit 1
+	    s=$(echo $(for a in $(ls /dev/sd? /dev/nvme?n? /dev/mmcblk? /dev/md?* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))
+            u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rload)
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')

@@ -98,7 +98,17 @@ done)
 	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/benchmark`" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rboot)
-	    u=$(printf "%-28s %s\n" "$k" "`/usr/lib/ruptime/chkreboot`" | mcrypt -f "$KEY" -Fq | base64 -w0)
+            r=0
+            # logged in users
+            liun=$(who |grep -v root | awk '{print $1}' |sort -u|wc -l)
+            r=$((r + liun))
+            # screen or tmux sessions
+            sotn=$(ps -ef |grep 'screen\|tmux' |grep -v grep | awk '{print $1 " " $NF}' |sort -u|wc -l)
+            r=$((r + sotn))
+            # something is running
+            cpu=$(uptime | sed s,.*:,,g | sed s/,//g|awk '{printf("%.0f\n",$(NF-2))}')
+            r=$((r + cpu))
+            u=$(printf "%-28s %s\n" "$k" "Users: $liun screen/tmux: $sotn CPU: $cpu Gore: $r" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rnet)
 	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)

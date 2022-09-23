@@ -1,8 +1,0 @@
-[Unit]
-Description=ruptime
-
-[Timer]
-OnBootSec=1m
-
-[Install]
-WantedBy=basic.target

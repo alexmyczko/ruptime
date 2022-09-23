@@ -1,0 +1,48 @@
+.TH ruptime 1 "September 20 2022"
+.SH NAME
+ruptime \- remote uptime
+.br
+runame \- remote uname
+.br
+rload \- remote load
+.br
+rnet \- remote network link
+.br
+rhw \- remote hardware
+.br
+rsw \- remote software
+.br
+rboot \- remote bootablity
+.br
+rdisk \- remote disk
+.br
+rbench \- remote benchmark
+.SH SYNOPSIS
+.B ruptime
+.RI [ option ]
+.br
+.SH DESCRIPTION
+This manual page documents briefly the
+.B ruptime
+command.
+.PP
+\fBruptime\fP is a program that reports uptime to a server, making the information remotely
+accessible using the ruptime client.
+.SH OPTIONS
+A summary of options is included below.
+.TP
+.B \-u
+Update the record of the host.
+.TP
+.B \-v
+Show version of program.
+.TP
+.B \-i
+Install the program to the system.
+.SH CONFIGURATION
+The configuration is needed in /etc/ruptime, ruptime.conf defines to which
+host:port a client reports to, and how the FQDN hostname is read.
+ruptime.key is the symmetric key for content encryption/decryption.
+.SH SEE ALSO
+.BR ruptimed (8).
+.br

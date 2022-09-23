@@ -1,0 +1,14 @@
+[Unit]
+Description=ruptime daemon
+Documentation=man:ruptimed(8)
+After=remote-fs.target nss-user-lookup.target
+
+[Service]
+EnvironmentFile=-/etc/ruptime/ruptime.conf
+ExecStart=/usr/bin/daemon --user=ruptime:ruptime /usr/bin/mini-inetd $PORT /usr/sbin/ruptimed
+IgnoreSIGPIPE=false
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

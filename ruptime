@@ -126,7 +126,8 @@ done)
 	;;
 	rnet)
 	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)
-	    u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
+	    l=$(iwconfig $s |grep "Link Quality=" | sed "s,Link Quality=,," | awk '{print $1"*100"}' | bc -l)
+	    u=$(printf "%-28s %s %.0f\n" "$k" "$s" "$l" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rdisk)
 	    s=$(echo $(for a in $(ls /dev/sd? /dev/xvd? /dev/nvme?n? /dev/mmcblk? /dev/md?* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))

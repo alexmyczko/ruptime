@@ -69,6 +69,12 @@ banana.ocean.net             2019/12/10 64 377
 ```
 
 ```
+$ rnet # FQDN                interface linkspeed wlanquality%
+fish.ocean.net               wlp3s0  144Mb/s 86
+orca.ocean.net.              enp4s0 	 2500Mb/s
+```
+
+```
 $ rboot # FQDN               users    screen/tmux    cpu load
 orca.ocean.net               Users: 2 screen/tmux: 1 CPU: 5
 ```

@@ -24,10 +24,6 @@ read CMD ARG
 h=$(echo $f| awk '{print $1}')
 if [ "${ARG}x" = "x" ]; then
     # only query command, deliver results asked for
-    if [ $CMD = "ruptime" ]; then
-	find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g"
-	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort
-    fi
     if [ $CMD = "xz.ruptime" ]; then
 	(find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g";
 	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | mcrypt -f /etc/ruptime/ruptime.key -Fq | base64 -w0

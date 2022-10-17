@@ -149,6 +149,11 @@ Right adjusted `rhw` output
 $ rhw|column -t -R3,4
 ```
 
+Your total diskspace
+```
+$ rdisk | sed "s,sd.,,g;s,nvme... ,,g;s,md.,,g;s,mmcblk.,,g" |sed "s,.*ethz.ch,,g" | awk '{for(i=t=0;i<NF;) t+=$++i; $0=t}1' |datamash sum 1
+```
+
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Configuration

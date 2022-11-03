@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# run with
-#daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
-
-# add system user ruptime
-#adduser --disabled-password --quiet --system --home /var/spool/ruptime --gecos "ruptime daemon" --group ruptime
-
 #source
 . /etc/ruptime/ruptime.conf
 

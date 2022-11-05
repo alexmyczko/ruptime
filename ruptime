@@ -67,21 +67,17 @@ if [ "${1}x" = "-ux" ]; then
 	;;
 	rsw)
 rsw=$(for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
-    which $a &>/dev/null && (
-	case $a in
-	  dpkg) num=`dpkg -l |grep ^ii |wc -l`;;
-	  rpm) num=`rpm -qa | wc -l`;;
-          brew) num=`brew list| wc -l`;;
-	  pip2) num=`pip2 list 2>/dev/null | wc -l`;;
-	  pip3) num=`pip3 list --local 2>/dev/null |sed "1,2d" |wc -l`;;
-	  spack) num=`spack find 2>/dev/null |wc -l`;;
-	  snap) num=`snap list |sed 1d |wc -l`;;
-	  flatpak) num=`flatpak list | wc -l`;;
-	  zypper) num=`zypper search --installed-only | grep package$ | wc -l`;;
-	  *) num="n/a";;
-	esac
-	echo -ne "$a $(echo $num) "
-    ) #|| echo "$a not found..."
+    num=""
+    which $a &>/dev/null && if [ $a == "dpkg" ]; then num=$(dpkg -l |grep ^ii |wc -l); fi
+    which $a &>/dev/null && if [ $a == "rpm" ]; then num=$(rpm -qa | wc -l); fi
+    which $a &>/dev/null && if [ $a == "brew" ]; then num=$(brew list| wc -l); fi
+    which $a &>/dev/null && if [ $a == "pip2" ]; then num=$(pip2 list 2>/dev/null | wc -l); fi
+    which $a &>/dev/null && if [ $a == "pip3" ]; then num=$(pip3 list --local 2>/dev/null |sed "1,2d" |wc -l); fi
+    which $a &>/dev/null && if [ $a == "spack" ]; then num=$(spack find 2>/dev/null |wc -l); fi
+    which $a &>/dev/null && if [ $a == "snap" ]; then num=$(snap list |sed 1d |wc -l); fi
+    which $a &>/dev/null && if [ $a == "flatpak" ]; then num=$(flatpak list | wc -l); fi
+    which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper search --installed-only | grep package$ | wc -l); fi
+    echo -ne "$a $(echo $num) ";
 done)
 	    u=$(printf "%-28s %s\n" "$k" "$rsw" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;

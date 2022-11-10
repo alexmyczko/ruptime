@@ -115,7 +115,7 @@ done)
             # something is running
             cpu=$(uptime | sed s,.*:,,g | sed s/,//g|awk '{printf("%.0f\n",$(NF-2))}')
             r=$((r + cpu))
-            u=$(printf "%-28s %s\n" "$k" "Users: $liun screen/tmux: $sotn CPU: $cpu Gore: $r" | mcrypt -f "$KEY" -Fq | base64 -w0)
+            u=$(printf "%-28s %s\n" "$k" "users $liun screen/tmux $sotn CPU $cpu gore $r" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rnet)
 	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)

@@ -75,8 +75,8 @@ orca.ocean.net               enp4s0 	 2500Mb/s
 ```
 
 ```
-$ rboot # FQDN               users    screen/tmux    cpu load
-orca.ocean.net               Users: 2 screen/tmux: 1 CPU: 5
+$ rboot # FQDN               users   screen/tmux   cpu load
+orca.ocean.net               users 2 screen/tmux 1 CPU 5
 ```
 
 ```

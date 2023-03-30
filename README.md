@@ -220,6 +220,10 @@ rdisk -u
 rhw -u
 ```
 
+## Other r commands
+
+- rdate, https://github.com/resurrecting-open-source-projects/openrdate
+
 ## Special Files
 
 - https://manpages.debian.org/unstable/manpages/nologin.5.en.html

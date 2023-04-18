@@ -33,7 +33,7 @@ It is now
 ## Never heard of ruptime, what does it look like?
 
 The output shows how long the system has been up, the number of  users currently on the
-system, and the load averages. The load average numbers give the number of jobs in the
+system, and the load averages[^6]. The load average numbers give the number of jobs in the
 run queue averaged over 1, 5 and 15 minutes.
 
 ```
@@ -239,4 +239,4 @@ rhw -u
 [^3]: https://sources.debian.org/src/netkit-rwho/0.17-14/ruptime/ruptime.c/
 [^4]: https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
 [^5]: https://www.gkogan.co/blog/simple-systems/
-
+[^6]: https://www.brendangregg.com/blog/2017-08-08/linux-load-averages.html

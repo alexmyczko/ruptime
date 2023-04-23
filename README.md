@@ -114,6 +114,11 @@ Find hosts that are least used by CPU
 $ rload | sort -k2n
 ```
 
+Find hosts that have 90%+ usage of either CPU/MEM/GPU/GPUMEM
+```
+$ rload -c | grep " [9][0-9].\| [0-9][0-9][0-9]."
+```
+
 Update `rnet` output for all online hosts
 ```
 # for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done

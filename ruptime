@@ -26,6 +26,11 @@ if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
 d=$(basename "$0")
+if [ "${1}x" = "-cx" ]; then
+    # colors for % output of rload
+    exec 1> >(sed "s, [0-9]\.[0-9][0-9],\x1b[38;5;118m&\x1b[0m,g" | sed "s, [0-8][0-9]\.[0-9][0-9],\x1b[38;5;118m&\x1b[0m,g" | sed "s, [9][0-4]\.[0-9][0-9],\x1b[38;5;226m&\x1b[0m,g" | sed "s, [9][5-9]\.[0-9][0-9],\x1b[38;5;208m&\x1b[0m,g" | sed "s, [1-9][0-9][0-9]\.[0-9][0-9],\x1b[38;5;196m&\x1b[0m,g")
+fi
+
 if [ "${1}x" = "-vx" ]; then
     echo "/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4A9sAT5dAA2XxFVWjPLgxfnRgdRgIQSgt9TGsV7TSG1xKWUG8G5YMVO8FRM2EayGM/GgHtwmj668Xw+A26ZYE+su6elQJjGDuAEZSwOM/j49GGzc3t38g2LEirK3/ecIt1nnsWhe63f6pp+ev6tvRhg5wziePirY/npZfXcJtAjynar/4AqvyYaQcma9P2w/iFwgBaUNJikGd7TZMcq4+mbEkRQ2HJAmrsj6jp+BYLexynUGSKUp3g61eNiZRzGtcQrxpd1Z7vGfaZ990oSUWtVInsQWTEUvPhwgpNqgHHC/FjjWVPqztxa2dxfUYAbFivN6G3GXaV5vdwQwzoyUSHk8RypDfFXzXPsw3Z+XBAXWuskt7QcEGxoFRsDtQ2WsdR/UahZcb13SdRExkRw8Xkm6vgWSxEffUF/JimgN4orTsHvIAAAAANqgc9niF47sAAHaAu0eAABrr504scRn+wIAAAAABFla" |base64 -d |xz -d
     cat << INFO

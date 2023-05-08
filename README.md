@@ -184,6 +184,14 @@ Running the daemon.
 daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ```
 
+## Classic Mode
+
+If you set `HOSTNAMECMD='hostname -s'` you will have the same mode as original rwho/ruptime/rwhod.
+You can even limit the thing to your single one network with
+```
+iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
+```
+
 ## Requirements
 - Client: `nc` `xz` `bc` `cron` `ethtool` `dmidecode` `memtester` `lm-sensors` `datamash` `nvidia-smi` `timeout` `mcrypt` `wireless-tools`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`

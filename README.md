@@ -29,6 +29,7 @@ It is now
 - rboot (remote rebootable?) - safety level for a reboot
 - rnet (remote network) - networking details (interface name, connection speed)
 - rdisk (remote disk) - overview of local disks and their speeds
+- rac (remote users' connect time) - overview of usage (see ac[^7])
 
 ## Never heard of ruptime, what does it look like?
 
@@ -253,3 +254,4 @@ rhw -u
 [^4]: https://sources.debian.org/src/netkit-rwho/0.17-14/rwhod/rwhod.c/
 [^5]: https://www.gkogan.co/blog/simple-systems/
 [^6]: https://www.brendangregg.com/blog/2017-08-08/linux-load-averages.html
+[^7]: https://manpages.debian.org/unstable/acct/ac.1.en.html

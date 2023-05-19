@@ -46,7 +46,7 @@ if [ "${1}x" = "-ix" ]; then
 	mkdir -p /etc/ruptime
 	cp etc/ruptime.conf etc/ruptime.key /etc/ruptime/
 	cp etc/cron.d/ruptime /etc/cron.d/ruptime
-	cd /usr/bin && for a in rsw rhw runame rbench rboot rdisk rload rnet; do ln -sf ruptime $a; done
+	cd /usr/bin && for a in rsw rhw runame rbench rboot rdisk rload rnet rac; do ln -sf ruptime $a; done
 	exit 0
     else
 	echo "MUST BE ROOT."
@@ -91,6 +91,10 @@ done)
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
             cores=$(getconf _NPROCESSORS_ONLN)
             u=$(printf "%-28s %s\n" "$k" "$biosdate $cores $mem" | mcrypt -f "$KEY" -Fq | base64 -w0)
+	;;
+	rac)
+	    ac=$(ac | awk '{print $2}')
+	    u$(printf "%-28s %s\n" "$ac" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rbench)
 	    dt=date

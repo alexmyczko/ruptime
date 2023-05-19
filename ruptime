@@ -3,21 +3,17 @@
 d=$(basename "$0")
 pgrep "$d -u" >/dev/null && exit 0
 
-if [ -f "$HOME"/.ruptime ]; then
-    . "$HOME"/.ruptime
-elif [ -f /etc/ruptime/ruptime.conf ]; then
+if [ -f /etc/ruptime/ruptime.conf ]; then
     . /etc/ruptime/ruptime.conf
 else
-    echo "NO CONFIG FOUND in $HOME/.ruptime or /etc/ruptime/ruptime.conf"
+    echo "NO CONFIG FOUND in /etc/ruptime/ruptime.conf"
     exit 1
 fi
 
-if [ -f "$HOME"/.ruptime.key ]; then
-    KEY="$HOME"/.ruptime.key
-elif [ -f /etc/ruptime/ruptime.key ]; then
+if [ -f /etc/ruptime/ruptime.key ]; then
     KEY="/etc/ruptime/ruptime.key"
 else
-    echo "NO KEY FOUND in $HOME/.ruptime.key or /etc/ruptime/ruptime.key"
+    echo "NO KEY FOUND in /etc/ruptime/ruptime.key"
     exit 1
 fi
 
@@ -32,7 +28,6 @@ if [ "${1}x" = "-cx" ]; then
 fi
 
 if [ "${1}x" = "-vx" ]; then
-    echo "/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4A9sAT5dAA2XxFVWjPLgxfnRgdRgIQSgt9TGsV7TSG1xKWUG8G5YMVO8FRM2EayGM/GgHtwmj668Xw+A26ZYE+su6elQJjGDuAEZSwOM/j49GGzc3t38g2LEirK3/ecIt1nnsWhe63f6pp+ev6tvRhg5wziePirY/npZfXcJtAjynar/4AqvyYaQcma9P2w/iFwgBaUNJikGd7TZMcq4+mbEkRQ2HJAmrsj6jp+BYLexynUGSKUp3g61eNiZRzGtcQrxpd1Z7vGfaZ990oSUWtVInsQWTEUvPhwgpNqgHHC/FjjWVPqztxa2dxfUYAbFivN6G3GXaV5vdwQwzoyUSHk8RypDfFXzXPsw3Z+XBAXWuskt7QcEGxoFRsDtQ2WsdR/UahZcb13SdRExkRw8Xkm6vgWSxEffUF/JimgN4orTsHvIAAAAANqgc9niF47sAAHaAu0eAABrr504scRn+wIAAAAABFla" |base64 -d |xz -d
     cat << INFO
 PLEASE CONTACT US@WEDONTHAVEAPRIVACYPROBLEM.COM FOR A CUSTOM LICENSE.
 THIS IS THE FREE SOFTWARE VERSION. VERSION 1.3

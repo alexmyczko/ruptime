@@ -6,15 +6,13 @@ pgrep "$d -u" >/dev/null && exit 0
 if [ -f /etc/ruptime/ruptime.conf ]; then
     . /etc/ruptime/ruptime.conf
 else
-    echo "NO CONFIG FOUND in /etc/ruptime/ruptime.conf"
-    exit 1
+    echo "NO CONFIG FOUND in /etc/ruptime/ruptime.conf"; exit 1
 fi
 
 if [ -f /etc/ruptime/ruptime.key ]; then
     KEY="/etc/ruptime/ruptime.key"
 else
-    echo "NO KEY FOUND in /etc/ruptime/ruptime.key"
-    exit 1
+    echo "NO KEY FOUND in /etc/ruptime/ruptime.key"; exit 1
 fi
 
 if [ "${SERVER}x" = "x" ]; then echo "SERVER not set"; exit 1; fi
@@ -29,7 +27,7 @@ fi
 
 if [ "${1}x" = "-vx" ]; then
     cat << INFO
-PLEASE CONTACT US@WEDONTHAVEAPRIVACYPROBLEM.COM FOR A CUSTOM LICENSE.
+PLEASE CONTACT US@WEDONTHAVEAPRIVACYPROBLEM.COM FOR A CUSTOM LICENSE AND SUPPORT.
 THIS IS THE FREE SOFTWARE VERSION. VERSION 1.4
 INFO
     exit 0

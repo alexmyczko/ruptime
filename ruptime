@@ -89,7 +89,7 @@ done)
 	;;
 	rac)
 	    ac=$(ac | awk '{print $2}')
-	    u$(printf "%-28s %s\n" "$ac" | mcrypt -f "$KEY" -Fq | base64 -w0)
+	    u=$(printf "%-28s %s\n" "$k" "$ac" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rbench)
 	    dt=date

@@ -234,6 +234,12 @@ rdisk -u
 rhw -u
 ```
 
+## rwho
+
+If you really wanted rwho, here's a hint
+
+`who |sed "s/ [a-z]/$(hostname -f):&/1;s,: ,:,1"`
+
 ## Other r commands
 
 - rdate, https://github.com/resurrecting-open-source-projects/openrdate

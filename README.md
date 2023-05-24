@@ -242,7 +242,7 @@ If you really wanted rwho, here's a hint
 
 ## Other r commands
 
-- rdate, https://github.com/resurrecting-open-source-projects/openrdate
+- `rdate`, https://github.com/resurrecting-open-source-projects/openrdate
 
 ## Special Files
 

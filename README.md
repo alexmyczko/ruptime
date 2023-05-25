@@ -30,6 +30,7 @@ It is now
 - rnet (remote network) - networking details (interface name, connection speed)
 - rdisk (remote disk) - overview of local disks and their speeds
 - rac (remote users' connect time) - overview of usage (see ac[^7])
+- rwho (remote who) - show who is logged in
 
 ## Never heard of ruptime, what does it look like?
 

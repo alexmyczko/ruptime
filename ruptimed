@@ -22,14 +22,14 @@ if [ "${ARG}x" = "x" ]; then
 	(find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g";
 	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | mcrypt -f /etc/ruptime/ruptime.key -Fq | base64 -w0
     fi
-    for a in runame rload rnet rsw rboot rbench rhw rdisk rac; do
+    for a in runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
 	if [ $CMD = "xz.$a" ]; then
 	    (find $SPOOL/ -name "*.$a" -exec cat {} \; |sort) | xz -c | mcrypt -f /etc/ruptime/ruptime.key -Fq | base64 -w0
 	fi
     done
 else
     # update/add entry
-    for a in ruptime runame rload rnet rsw rboot rbench rhw rdisk rac; do
+    for a in ruptime runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
 	if [ $CMD = "$a" ]; then
 	    echo "$ARG" | base64 -d | mcrypt -d -f /etc/ruptime/ruptime.key -Fq > "$SPOOL/${h}.${CMD}"
 	fi

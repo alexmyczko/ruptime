@@ -242,7 +242,7 @@ rhw -u
 
 ## Other r commands
 
-- rdate, https://github.com/resurrecting-open-source-projects/openrdate
+- `rdate`, https://github.com/resurrecting-open-source-projects/openrdate
 
 ## Special Files
 

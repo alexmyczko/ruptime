@@ -86,6 +86,11 @@ $ rbench # FQDN              Memory   Total CPU      Cores
 orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 ```
 
+```
+$ rac|sort -k2nr
+orca.ocean.net               15122.94
+```
+
 ## Command line options
 
 ```

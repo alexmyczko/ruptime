@@ -87,8 +87,8 @@ orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 ```
 
 ```
-$ rac # FQDN                 hours
-orca.ocean.net               15122.94
+$ rac # FQDN                 hours users
+orca.ocean.net               15122.94 4
 ```
 
 ## Command line options
@@ -164,6 +164,12 @@ $ rhw|column -t -R3,4
 Your total diskspace
 ```
 $ rdisk | sed "s,sd.,,g;s,nvme... ,,g;s,md.,,g;s,mmcblk.,,g" |sed "s,.*ethz.ch,,g" | awk '{for(i=t=0;i<NF;) t+=$++i; $0=t}1' |datamash sum 1
+```
+
+Number of users
+```
+$ rac | awk '{print $3}' |grep -v ^$ |datamash sum 1
+483
 ```
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.

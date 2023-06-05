@@ -87,7 +87,7 @@ orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 ```
 
 ```
-$ rac|sort -k2nr
+$ rac # FQDN                 hours
 orca.ocean.net               15122.94
 ```
 

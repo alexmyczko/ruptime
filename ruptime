@@ -75,7 +75,7 @@ rsw=$(for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
     which $a &>/dev/null && if [ $a == "snap" ]; then num=$(snap list |sed 1d |wc -l); fi
     which $a &>/dev/null && if [ $a == "flatpak" ]; then num=$(flatpak list | wc -l); fi
     which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper search --installed-only | grep package$ | wc -l); fi
-    echo -ne "$a $(echo $num) ";
+    if [ ${num}x != x ]; then echo -ne "$a $(echo $num) "; fi
 done)
 	    u=$(printf "%-28s %s\n" "$k" "$rsw" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;

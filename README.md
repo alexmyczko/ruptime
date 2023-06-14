@@ -246,6 +246,8 @@ Login to host and try these commands
 ```
 ac -p
 ethtttool -i $(ifconfig|grep -v "^$"|sed "s,:.*,,"|grep -v "^ "|grep -v ^lo|head -1)
+nvme smart-log /dev/nvme0n1
+badblocks -nsv /dev/sda
 ```
 
 ## Other r commands

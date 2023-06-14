@@ -33,7 +33,6 @@ It is now
 - rwho (remote who) - show who is logged in
 
 ## Never heard of ruptime, what does it look like?
-
 The output shows how long the system has been up, the number of  users currently on the
 system, and the load averages[^6]. The load average numbers give the number of jobs in the
 run queue averaged over 1, 5 and 15 minutes.
@@ -92,7 +91,6 @@ orca.ocean.net               15122.94 4
 ```
 
 ## Command line options
-
 ```
 -i   Install the software
 -u   Upload information to the server (NOTE: this might require root permission and get restricted to the root user in the future)
@@ -198,7 +196,6 @@ daemon --user=ruptime:ruptime mini-inetd 51300 /usr/sbin/ruptimed
 ```
 
 ## Classic Mode
-
 If you set `HOSTNAMECMD='hostname -s'` you will have the same mode as original rwho/ruptime/rwhod.
 You can even limit the thing to your single one network with
 ```
@@ -244,12 +241,17 @@ rdisk -u
 rhw -u
 ```
 
-## Other r commands
+## More Details
+Login to host and try these commands
+```
+ac -p
+ethtttool -i $(ifconfig|grep -v "^$"|sed "s,:.*,,"|grep -v "^ "|grep -v ^lo|head -1)
+```
 
+## Other r commands
 - `rdate`, https://github.com/resurrecting-open-source-projects/openrdate
 
 ## Special Files
-
 - https://manpages.debian.org/unstable/manpages/nologin.5.en.html
 - https://manpages.debian.org/unstable/manpages/issue.5.en.html
 - https://manpages.debian.org/unstable/manpages/motd.5.en.html

@@ -174,8 +174,15 @@ Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 ## Installation on DEB based systems
 
 Find the debs in the release page.
+
+To install the client run
 ```
 DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.5-1_all.deb
+```
+
+To install the server run
+```
+DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.5-1_all.deb
 ```
 
 ## Configuration

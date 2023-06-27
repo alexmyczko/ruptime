@@ -171,6 +171,13 @@ $ rac | awk '{print $3}' |grep -v ^$ |datamash sum 1
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
+## Installation on DEB based systems
+
+Find the debs in the release page.
+```
+DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.5-1_all.deb
+```
+
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].
 ```

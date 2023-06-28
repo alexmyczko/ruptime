@@ -89,6 +89,15 @@ $ rac # FQDN                 hours users
 orca.ocean.net               15122.94 4
 ```
 
+```
+$ rwho # user host                   date              IP
+root     fish.ocean.net:pts/0        2023-06-12 07:28 (1.1.1.1)
+me       fish.ocean.net:pts/1        2022-06-23 15:54 (127.0.0.1)
+you      fish.ocean.net:pts/3        2023-06-28 06:33 (12.34.56.78)
+we       fish.ocean.net:pts/3        1995-06-28 06:33 (100.200.100.200)
+us       fish.ocean.net:pts/3        2023-06-28 06:33 (44.44.44.44)
+```
+
 ## Command line options
 ```
 -i   Install the software

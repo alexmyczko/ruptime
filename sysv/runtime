@@ -1,0 +1,66 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:          ruptime
+# Required-Start:    $remote_fs $network
+# Required-Stop:     $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       ruptime daemon
+### END INIT INFO
+
+# Define variables
+SERVICE_NAME="ruptime"
+SERVICE_PATH="/usr/sbin/ruptimed"
+SERVICE_USER="ruptime"
+
+# Load environment variables from file (if available)
+if [ -f /etc/ruptime/ruptime.conf ]; then
+    . /etc/ruptime/ruptime.conf
+fi
+
+# Function to start the service
+start() {
+    echo "Starting $SERVICE_NAME..."
+    start-stop-daemon --start --chuid $SERVICE_USER --exec $SERVICE_PATH
+}
+
+# Function to stop the service
+stop() {
+    echo "Stopping $SERVICE_NAME..."
+    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --name $SERVICE_NAME
+}
+
+# Function to check the status of the service
+status() {
+    status=$(ps -ef | grep $SERVICE_PATH | grep -v grep)
+    if [ -n "$status" ]; then
+        echo "$SERVICE_NAME is running."
+    else
+        echo "$SERVICE_NAME is not running."
+    fi
+}
+
+# Handle command-line arguments
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        sleep 1
+        start
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit 0

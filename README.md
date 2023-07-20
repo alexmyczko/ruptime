@@ -284,6 +284,7 @@ sensors
 - https://manpages.debian.org/unstable/cron/crontab.1.en.html references cron.allow cron.disallow
 - https://manpages.debian.org/unstable/login/login.1.en.html
 - https://manpages.debian.org/unstable/manpages/services.5.en.html
+- https://manpages.debian.org/unstable/finger/finger.1.en.html
 
 [^1]: https://en.wikipedia.org/wiki/Berkeley_r-commands
 [^2]: https://manpages.debian.org/unstable/manpages/services.5.en.html

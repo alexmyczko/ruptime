@@ -134,7 +134,7 @@ $ rload -c | grep " [9][0-9].\| [0-9][0-9][0-9]."
 
 Update `rnet` output for all online hosts
 ```
-# for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done
+$ for a in `ruptime | grep -v " down " | awk '{print $1}'`; do echo $a; ssh root@$a "runame -u"; done
 ```
 
 List all hosts sorted by network speed
@@ -149,7 +149,7 @@ $ join <(ruptime) <(rload) | column -t
 
 Run something on all hosts having Ubuntu 22.04
 ```
-# runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
+$ runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'
 ```
 
 Get total cores and memory of all your machines

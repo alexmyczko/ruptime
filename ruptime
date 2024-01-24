@@ -91,7 +91,7 @@ done)
 	    u=$(printf "%-28s %s %s\n" "$k" "$ac" "$nu" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rwho)
-	    w=$(who |sed "s/ [a-zA-Z:]/ $(hostname -f):&/1;s,: ,:,1")
+	    w=$(who |sed "s/ [a-zA-Z:]/ $(eval "$HOSTNAMECMD"):&/1;s,: ,:,1")
 	    u=$(printf "%s\n" "$w" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rbench)

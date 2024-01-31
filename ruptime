@@ -137,7 +137,7 @@ done)
             fi
 	;;
 	rdisk)
-	    s=$(echo $(for a in $(ls /dev/ada? /dev/sd? /dev/xvd? /dev/nvme?n? /dev/mmcblk? /dev/md[0-9]* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))
+	    s=$(echo $(for a in $(ls /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n? /dev/mmcblk? /dev/md[0-9]* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))
             u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rload)

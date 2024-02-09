@@ -33,7 +33,7 @@ INFO
     exit 0
 fi
 if [ "${1}x" = "-ix" ]; then
-    # install the software and symlinks
+    # initialize host information
     if [ 0 -eq `id -u` ]; then
 	cp ruptime /usr/bin
 	mkdir -p /etc/ruptime
@@ -45,6 +45,10 @@ if [ "${1}x" = "-ix" ]; then
 	echo "MUST BE ROOT."
 	exit 1
     fi
+fi
+if [ "${1}x" = "-ax" ]; then
+    all=$(grep ln $(which ruptime) |sed "s,.*in\ ,,)
+    echo $all
 fi
 if [ "${1}x" = "-ux" ]; then
     k=$(eval "$HOSTNAMECMD")

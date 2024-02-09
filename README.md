@@ -102,6 +102,7 @@ us       fish.ocean.net:pts/3        2023-06-28 06:33 (44.44.44.44)
 ```
 -a   Show all information about host
 -i   Initialize the software
+-o   Overview
 -u   Upload information to the server (NOTE: this might require root permission and get restricted to the root user in the future)
 -v   Print license/version and quit
 ```

@@ -149,6 +149,11 @@ Combined `ruptime` and `rload` output
 $ join <(ruptime) <(rload) | column -t
 ```
 
+Find missing reports
+```
+$ diff -y <(ruptime|awk '{print $1}') <(rhw|awk '{print $1}')
+```
+
 Run something on all hosts having Ubuntu 22.04
 ```
 $ runame | grep jammy | awk '{print $1}' | parallel -j0 'ssh root@{} "something"'

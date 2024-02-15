@@ -151,7 +151,7 @@ $ join <(ruptime) <(rload) | column -t
 
 Find missing reports
 ```
-$ diff -y <(ruptime|awk '{print $1}') <(rhw|awk '{print $1}')
+$ diff -y <(ruptime|awk '{print $1}') <(rhw|awk '{print $1}') | grep '<\|>\||'
 ```
 
 Run something on all hosts having Ubuntu 22.04

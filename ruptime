@@ -89,7 +89,7 @@ done)
 	    u=$(printf "%-28s %s\n" "$k" "$rsw" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rhw)
-	    biosdate=$(dmidecode -s bios-release-date | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
+	    biosdate=$(dmidecode -s bios-release-date 2>/dev/null | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
             if [ -d /sys/firmware/efi/ ]; then sys=UEFI; else sys=BIOS; fi
             #/usr/sbin/lsmod|grep "^nvram " >/dev/null && head -1 /proc/driver/nvram |grep not >/dev/null; if [ "$?" -eq 0 ]; then cmos="CMOS+"; else cmos="CMOS-"; fi
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')

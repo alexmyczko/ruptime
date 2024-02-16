@@ -136,14 +136,16 @@ done)
             u=$(printf "%-28s %s\n" "$k" "users $liun screen/tmux $sotn CPU $cpu gore $r" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rnet)
-	    s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)
+            netdev=$(ip r |grep ^default |sed "s,.*dev ,,g" |awk '{print $1}')
+            s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")
             iwconfig $(echo $s|awk '{print $1}') &>/dev/null; r=$?
             if [ "$r" = 0 ]; then
                 l=$(iwconfig $s 2>/dev/null|grep "Link Quality=" | sed "s,Link Quality=,," | awk '{print $1"*100"}' | bc -l);\
                 s2=$(iwconfig $s 2>/dev/null|grep "Bit Rate" | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}'); \
                 u=$(printf "%-28s %s %s %.0f\n" "$k" "$s" "$s2" "$l" | mcrypt -f "$KEY" -Fq | base64 -w0)
             else
-                s=$(ifconfig |grep -v "^ " |grep -v ^$ |grep -v "^lo"|sed "s,:.*,," |while read a; do echo -n "$a "; ethtool $a 2>/dev/null |grep -i speed; done |sed "s,.peed:,,"|grep -v Unknown|head -1)
+                netdev=$(ip r |grep ^default |sed "s,.*dev ,,g" |awk '{print $1}')
+                s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")
                 u=$(printf "%-28s %s\n" "$k" "$s" | mcrypt -f "$KEY" -Fq | base64 -w0)
             fi
 	;;

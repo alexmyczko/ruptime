@@ -12,7 +12,10 @@ else
     if [ ! $? = 0 ]; then
         echo "NO CONFIG FOUND in /etc/ruptime/ruptime.conf nor defaults"; exit 1
     else
-        echo "FOUND defaults";
+        #echo "FOUND defaults";
+	SERVER=$(defaults read ch.aiei.ruptime SERVER)
+	PORT=$(defaults read ch.aiei.ruptime PORT)
+	HOSTNAMECMD=$(defaults read ch.aiei.ruptime HOSTNAMECMD)
     fi
 fi
 
@@ -23,7 +26,8 @@ else
     if [ ! $? = 0 ]; then
         echo "NO KEY FOUND in /etc/ruptime/ruptime.key"; exit 1
     else
-        echo "FOUND defaults";
+        #echo "FOUND defaults";
+	KEY=$(defaults read ch.aiei.ruptime KEY)
     fi
 fi
 

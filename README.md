@@ -286,6 +286,11 @@ sensors
 ## Links to related software
 
 - https://github.com/rfmoz/tuptime
+- https://github.com/dylanaraps/neofetch
+- https://github.com/glpi-project/glpi-agent
+- https://github.com/snipe/snipe-it
+- https://github.com/PRTG/PythonMiniProbe/
+- https://github.com/ganglia/monitor-core
 
 ## Special Files
 - https://manpages.debian.org/unstable/manpages/nologin.5.en.html

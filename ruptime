@@ -8,7 +8,7 @@ pgrep "$d -u" >/dev/null && exit 0
 if [ -f /etc/ruptime/ruptime.conf ]; then
     . /etc/ruptime/ruptime.conf
 else
-    defaults read ch.aiei.ruptime 2>/dev/null
+    defaults read ch.aiei.ruptime 2>/dev/null >/dev/null
     if [ ! $? = 0 ]; then
         echo "NO CONFIG FOUND in /etc/ruptime/ruptime.conf nor defaults"; exit 1
     else
@@ -19,7 +19,7 @@ fi
 if [ -f /etc/ruptime/ruptime.key ]; then
     KEY="/etc/ruptime/ruptime.key"
 else
-    defaults read ch.aiei.ruptime 2>/dev/null
+    defaults read ch.aiei.ruptime 2>/dev/null >/dev/null
     if [ ! $? = 0 ]; then
         echo "NO KEY FOUND in /etc/ruptime/ruptime.key"; exit 1
     else

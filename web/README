@@ -1,0 +1,5 @@
+cp /usr/share/fonts/truetype/agave/*.ttf .
+for a in *.ttf; do woff2_compress $a; done
+rm *.ttf
+
+ln -s ruptime.cgi index.cgi

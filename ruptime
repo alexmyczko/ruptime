@@ -95,7 +95,8 @@ done)
             #/usr/sbin/lsmod|grep "^nvram " >/dev/null && head -1 /proc/driver/nvram |grep not >/dev/null; if [ "$?" -eq 0 ]; then cmos="CMOS+"; else cmos="CMOS-"; fi
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
             cores=$(getconf _NPROCESSORS_ONLN)
-            u=$(printf "%-28s %s\n" "$k" "$biosdate $sys $cores $mem" | mcrypt -f "$KEY" -Fq | base64 -w0)
+            gpu=0; which nvidia-smi >/dev/null && gpu=$(nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv|sed 1d|wc -l)
+            u=$(printf "%-28s %s\n" "$k" "$biosdate $sys $cores $mem $gpu" | mcrypt -f "$KEY" -Fq | base64 -w0)
 	;;
 	rac)
 	    ac=$(ac | awk '{print $2}')
@@ -158,7 +159,7 @@ done)
 	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
 	    case "$(uname -s)" in
 		Linux)
-		    gpu=$(which nvidia-smi >/dev/null && printf "%6.2f %6.2f\n" $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv |sed 1d|sed "s/%,//g;s/MiB//g;s/,//g;s/  / /g" |datamash -t" " median 1-2 2>/dev/null))
+		    gpu=$(which nvidia-smi >/dev/null && printf "%6.2f %6.2f\n" $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv |sed 1d|sed "s/%//g;s/MiB//g;s/,//g;s/  / /g" |datamash -t" " median 1-2 2>/dev/null))
 		    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
 		;;
 		Darwin)

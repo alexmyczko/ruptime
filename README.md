@@ -283,6 +283,10 @@ sensors
 ## Other r commands
 - `rdate`, https://github.com/resurrecting-open-source-projects/openrdate
 
+## Links to related software
+
+- https://github.com/rfmoz/tuptime
+
 ## Special Files
 - https://manpages.debian.org/unstable/manpages/nologin.5.en.html
 - https://manpages.debian.org/unstable/manpages/issue.5.en.html

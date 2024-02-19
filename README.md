@@ -62,10 +62,10 @@ seahorse.ocean.net           dpkg 7243 rpm 0 pip3 393
 ```
 
 ```
-$ rhw # FQDN                 age        cores memory
-fish.ocean.net               2008/09/08 8 31
-lemon.ocean.net              2021/08/09 16 16
-banana.ocean.net             2019/12/10 64 377
+$ rhw # FQDN                 age        efi? cores memory
+fish.ocean.net               2008/09/08 BIOS 8 31
+lemon.ocean.net              2021/08/09 UEFI 16 16
+banana.ocean.net             2019/12/10 UEFI 64 377
 ```
 
 ```

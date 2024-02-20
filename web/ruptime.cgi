@@ -12,6 +12,18 @@ body,tt,pre {
 font-family: agave, sans-serif;
 }
 
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
 :root {
   --text: #000;
   --bg: #fff;
@@ -37,6 +49,16 @@ for a in $(grep ruptime /usr/bin/ruptime  |head -1 |sed "s,.*in ,,;s,;.*,,"); do
 	run=$a
     fi
 done
+cat << TOPRIGHT
+<div class="topright">
+<a href="?query=stats">stats</a>
+</div>
+TOPRIGHT
+cat << BOTTOMRIGHT
+<div class="bottomright">
+<a href="https://github.com/alexmyczko/ruptime/"><img src="https://raw.githubusercontent.com/alexmyczko/ruptime/debian/.ruptime.png" height=16></a>
+</div>
+BOTTOMRIGHT
 echo "<pre>"
 $run
 echo "<br>"

@@ -194,8 +194,8 @@ Find the debs in the [release](https://github.com/alexmyczko/ruptime/releases) p
 To download:
 ```
 curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_all.deb
-curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_amd64.deb
-curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_arm64.deb
+curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptime_1.6-1_amd64.deb
+curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptime_1.6-1_arm64.deb
 ```
 
 To install the client run

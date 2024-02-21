@@ -19,7 +19,7 @@ font-family: agave, sans-serif;
 }
 
 .bottomright {
-  position: absolute;
+  position: fixed;
   bottom: 8px;
   right: 8px;
 }

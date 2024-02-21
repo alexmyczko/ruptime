@@ -10,26 +10,26 @@ You will automatically get instant list of hosts (down or up), inventory of hard
 comparable list of benchmark results.
 
 While it was
-- rcp (remote copy)
-- rexec (remote execution)
-- rlogin (remote login)
-- rstat
-- ruptime
-- rwho (remote who)
-- rwall (remote wall)
+- `rcp` (remote copy)
+- `rexec` (remote execution)
+- `rlogin` (remote login)
+- `rstat`
+- `ruptime`
+- `rwho` (remote who)
+- `rwall` (remote wall)
 
 It is now
-- ruptime (remote uptime) - the classic
-- runame (remote uname and OS/release) - keep track what OS/release you run
-- rsw (remote software) - what kind of package managers did sneak in
-- rhw (remote hardware, inventory) - what hardware you have
-- rload (remote load of CPU/MEM/GPU/GPUMEM) - usage of hardware
-- rbench (remote benchmark) - comparable list of your hardware
-- rboot (remote rebootable?) - safety level for a reboot
-- rnet (remote network) - networking details (interface name, connection speed)
-- rdisk (remote disk) - overview of local disks and their speeds
-- rac (remote users' connect time) - overview of usage (see ac[^7])
-- rwho (remote who) - show who is logged in
+- `ruptime` (remote uptime) - the classic
+- `runame` (remote uname and OS/release) - keep track what OS/release you run
+- `rsw` (remote software) - what kind of package managers did sneak in
+- `rhw` (remote hardware, inventory) - what hardware you have
+- `rload` (remote load of CPU/MEM/GPU/GPUMEM) - usage of hardware
+- `rbench` (remote benchmark) - comparable list of your hardware
+- `rboot` (remote rebootable?) - safety level for a reboot
+- `rnet` (remote network) - networking details (interface name, connection speed)
+- `rdisk` (remote disk) - overview of local disks and their speeds
+- `rac` (remote users' connect time) - overview of usage (see ac[^7])
+- `rwho` (remote who) - show who is logged in
 
 ## Never heard of ruptime, what does it look like?
 The output shows how long the system has been up, the number of  users currently on the
@@ -189,16 +189,23 @@ Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Installation on DEB based systems
 
-Find the debs in the release page.
+Find the debs in the [release](https://github.com/alexmyczko/ruptime/releases) page.
+
+To download:
+```
+curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_all.deb
+curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_amd64.deb
+curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.6/ruptimed_1.6-1_arm64.deb
+```
 
 To install the client run
 ```
-DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.5-1_all.deb
+DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.6-1_amd64.deb
 ```
 
 To install the server run
 ```
-DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.5-1_all.deb
+DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.6-1_amd64.deb
 ```
 
 ## Configuration

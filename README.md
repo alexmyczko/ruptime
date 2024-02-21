@@ -205,7 +205,7 @@ DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.6-1_amd64.deb
 
 To install the server run
 ```
-DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.6-1_amd64.deb
+DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.6-1_all.deb
 ```
 
 ## Configuration

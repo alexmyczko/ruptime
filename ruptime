@@ -108,6 +108,7 @@ done)
             if [ -d /sys/firmware/efi/ ]; then sys=UEFI; else sys=BIOS; fi
             #/usr/sbin/lsmod|grep "^nvram " >/dev/null && head -1 /proc/driver/nvram |grep not >/dev/null; if [ "$?" -eq 0 ]; then cmos="CMOS+"; else cmos="CMOS-"; fi
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
+            which free >/dev/null || mem=$(sysctl -n hw.memsize|awk '{printf "%.0f\n", $1/1024/1024/1024}')
             cores=$(getconf _NPROCESSORS_ONLN)
             gpu=0; which nvidia-smi >/dev/null && gpu=$(nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv|sed 1d|wc -l)
             u=$(printf "%-28s %s\n" "$k" "$biosdate $sys $cores $mem $gpu" | mcrypt -f "$KEY" -Fq | base64 -w0)

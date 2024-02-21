@@ -28,6 +28,7 @@ else
     else
         #echo "FOUND defaults";
 	KEY=$(defaults read ch.aiei.ruptime KEY)
+        export MCRYPT_KEY=$KEY
     fi
 fi
 

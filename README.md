@@ -185,6 +185,11 @@ $ rac | awk '{print $3}' |grep -v ^$ |datamash sum 1
 483
 ```
 
+Find hosts without ruptime
+```
+diff -y <(ruptime|awk '{print $1}') <(rhw|awk '{print $1}') | grep '<\|>\||'
+```
+
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
 ## Installation on DEB based systems

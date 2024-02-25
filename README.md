@@ -101,7 +101,9 @@ us       fish.ocean.net:pts/3        2023-06-28 06:33 (44.44.44.44)
 ## Command line options
 ```
 -a   Show all information about host
+-h   Help
 -i   Initialize the software
+-m   Multisite ruptime
 -o   Overview
 -u   Upload information to the server (NOTE: this might require root permission and get restricted to the root user in the future)
 -v   Print license/version and quit
@@ -244,7 +246,7 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 ```
 
 ## Requirements
-- Client: `nc` `xz` `bc` `cron` `dmidecode` `memtester` `datamash` `timeout` `mcrypt` `wireless-tools` `acct`
+- Client: `nc` `xz` `bc` `cron` `dmidecode` `memtester` `timeout` `wireless-tools` `acct`
 - Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
 - Optionals: `pen` `trickle` `bkt` `iptables` `wireless-tools` `nvidia-smi` `lm-sensors`
 

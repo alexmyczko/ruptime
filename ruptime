@@ -44,7 +44,7 @@ fi
 
 if [ "${1}x" = "-vx" ]; then
     cat << INFO
-$0 version 1.6
+$0 version 1.8
 INFO
     exit 0
 fi

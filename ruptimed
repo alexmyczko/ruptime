@@ -17,14 +17,14 @@ else
 fi
 
 if [ -f /etc/ruptime/ruptime.key ]; then
-    KEY="/etc/ruptime/ruptime.key"
+    export KEY=$(cat /etc/ruptime/ruptime.key)
 else
     defaults read ch.aiei.ruptime 2>/dev/null >/dev/null
     if [ ! $? = 0 ]; then
         echo "NO KEY FOUND in /etc/ruptime/ruptime.key"; exit 1
     else
         #echo "FOUND defaults";
-	KEY=$(defaults read ch.aiei.ruptime KEY)
+	export KEY=$(defaults read ch.aiei.ruptime KEY)
     fi
 fi
 
@@ -45,18 +45,18 @@ if [ "${ARG}x" = "x" ]; then
     # only query command, deliver results asked for
     if [ $CMD = "xz.ruptime" ]; then
 	(find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g";
-	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | mcrypt -f $KEY -Fq | base64 -w0
+	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
     fi
     for a in runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
 	if [ $CMD = "xz.$a" ]; then
-	    (find $SPOOL/ -name "*.$a" -exec cat {} \; |sort) | xz -c | mcrypt -f $KEY -Fq | base64 -w0
+	    (find $SPOOL/ -name "*.$a" -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
 	fi
     done
 else
     # update/add entry
     for a in ruptime runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
 	if [ $CMD = "$a" ]; then
-	    echo "$ARG" | base64 -d | mcrypt -d -f $KEY -Fq > "$SPOOL/${h}.${CMD}"
+	    echo "$ARG" | openssl enc -d -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out - > "$SPOOL/${h}.${CMD}"
 	fi
     done
 fi

@@ -223,7 +223,7 @@ PORT=51300
 HOSTNAMECMD='hostname -f'
 ```
 
-Create a key for the encryption with `mcrypt`. You will need this on server and client for symmetric encryption.
+Create a key for the encryption with `openssl`. You will need this on server and client for symmetric encryption.
 ```
 COLUMNS=160 dd if=/dev/urandom bs=1 count=60 2>/dev/null > /etc/ruptime/ruptime.key
 ```
@@ -247,7 +247,7 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 
 ## Requirements
 - Client: `nc` `xz` `bc` `cron` `dmidecode` `memtester` `timeout` `wireless-tools` `acct`
-- Server: `nc` `xz` `tcputils` `daemon` `mcrypt`
+- Server: `nc` `xz` `tcputils` `daemon`
 - Optionals: `pen` `trickle` `bkt` `iptables` `wireless-tools` `nvidia-smi` `lm-sensors`
 
 ## Supported Systems

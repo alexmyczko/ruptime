@@ -258,7 +258,7 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 ## Starting it
 - FreeBSD: rc.d
 - Linux: daemon, init.d, cron @reboot, systemd
-- macOS: https://medium.com/swlh/how-to-use-launchd-to-run-services-in-macos-b972ed1e352
+- macOS: https://launchd.info
 
 - without systemd
 ```

@@ -100,6 +100,7 @@ rsw=$(for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
     which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper search --installed-only | grep package$ | wc -l); fi
     if [ ${num}x != x ]; then echo -ne "$a $(echo $num) "; fi
 done)
+    	    if [ -d /Applications ]; then rsw="${rsw}Applications $(ls /Applications 2>/dev/null |wc -l|awk '{print $1}')"; fi
 	    u=$(printf "%-28s %s\n" "$k" "$rsw" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
 	rhw)

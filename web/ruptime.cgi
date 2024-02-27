@@ -3,6 +3,8 @@
 echo -e "Content-type: text/html\n\n";
 
 cat << EOF
+<title>RUPTIME</title>
+<meta http-equiv="Refresh" content="60">
 <style type="text/css"><!--
 @font-face
 { font-family: agave;

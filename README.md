@@ -189,7 +189,7 @@ $ rac | awk '{print $3}' |grep -v ^$ |datamash sum 1
 
 Find hosts without ruptime
 ```
-diff -y <(ruptime|awk '{print $1}') <(arp -a|sort|awk '{print $1}') | grep '>\||'
+$ diff -y <(ruptime|awk '{print $1}') <(arp -a|sort|awk '{print $1}') | grep '>\||'
 ```
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.

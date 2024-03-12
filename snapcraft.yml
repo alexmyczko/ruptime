@@ -12,3 +12,6 @@ parts:
   my-part:
     # See 'snapcraft plugins'
     plugin: nil
+
+# snapcraft login
+# snapcraft upload --release=stable ruptime_whatever.snap

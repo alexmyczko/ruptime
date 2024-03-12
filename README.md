@@ -215,6 +215,10 @@ To install the server run
 DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.8-1_all.deb
 ```
 
+Installing on macOS
+
+https://github.com/alexmyczko/homebrew-mac/blob/main/ruptime.rb
+
 Installing with Snap
 
 https://snapcraft.io/ruptime

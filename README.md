@@ -215,6 +215,10 @@ To install the server run
 DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.8-1_all.deb
 ```
 
+Installing with Snap
+
+https://snapcraft.io/ruptime
+
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].
 ```

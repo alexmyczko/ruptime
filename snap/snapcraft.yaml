@@ -20,6 +20,8 @@ apps:
 parts:
   ruptime:
     plugin: dump
+    source: '$FILENAME'
+    source-type: tar
 
 # snapcraft login
 # snapcraft upload --release=stable ruptime_whatever.snap

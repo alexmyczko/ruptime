@@ -7,11 +7,19 @@ description: |
                                                                                   
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # was devmode use 'strict' once you have the right plugs and slots
- 
+
+apps:
+  ruptime:
+    command: ruptime.app/ruptime
+
+#parts:
+#  my-part:
+#    # See 'snapcraft plugins'
+#    plugin: nil
+
 parts:
-  my-part:
-    # See 'snapcraft plugins'
-    plugin: nil
+  ruptime:
+    plugin: dump
 
 # snapcraft login
 # snapcraft upload --release=stable ruptime_whatever.snap

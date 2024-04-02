@@ -10,7 +10,7 @@ confinement: strict # was devmode use 'strict' once you have the right plugs and
 
 apps:
   ruptime:
-    command: ruptime.app/ruptime
+    command: bin/ruptime
 
 #parts:
 #  my-part:
@@ -20,8 +20,12 @@ apps:
 parts:
   ruptime:
     plugin: dump
-    source: '$FILENAME'
-    source-type: tar
+    source: https://github.com/alexmyczko/ruptime.git
+#    source-type: tar
+#  remote-part:
+#    plugin: dump
+#    source: https://remote-resource.org/cool-package.deb
+#    source-type: deb
 
 # snapcraft login
 # snapcraft upload --release=stable ruptime_whatever.snap

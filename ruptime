@@ -84,7 +84,7 @@ if [ "${1}x" = "-ux" ]; then
 	    u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
 	ruptime)
-	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %11s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
+	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %12s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
 	rsw)
 rsw=$(for a in dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do

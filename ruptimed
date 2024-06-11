@@ -30,12 +30,14 @@ fi
 
 f=$(getpeername)
 
-#echo $f |grep $ACL >/dev/null
-#if [ ! $? = 0 ]; then
-#    echo Not allowed
-#    echo "$f" >> $SPOOL/unauthorized
-#    exit 0
-#fi
+if [ ! ${ACL}x = x ]; then
+   echo $f |grep ${ACL}$ >/dev/null
+      if [ ! $? = 0 ]; then
+         #echo Not allowed
+         echo "$f" >> $SPOOL/unauthorized
+      exit 0
+   fi
+fi
 
 #echo STARTED > $SPOOL/.started
 

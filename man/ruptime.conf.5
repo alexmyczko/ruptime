@@ -1,1 +1,28 @@
-
+.TH "RUPTIME.CONF" "5" "2024-07-12" "ruptime" "File formats"
+.SH "NAME"
+ruptime.conf \- remote uptime daemon and client configuration
+.SH "SYNOPSIS"
+.sp
+\fI/etc/ruptime/ruptime.conf\fP
+.SH "DESCRIPTION"
+.sp
+SERVER defines the server IP or FQDN to report to.
+.br
+PORT defines which port to bind to.
+.br
+HOSTNAMECMD is the command for FQDN definition.
+.br
+SPOOL defines where to store the information of the clients reporting.
+.br
+.SH "EXAMPLE"
+SERVER=YOUR.PUBLIC.IP.OR.FQDN
+.br
+PORT=51300
+.br
+HOSTNAMECMD='hostname -f'
+.br
+SPOOL=/var/spool/ruptime
+.br
+.SH "FILES"
+.sp
+\fI/etc/ruptime/ruptime.conf\fP, \fI/etc/ruptime/ruptime.key\fP

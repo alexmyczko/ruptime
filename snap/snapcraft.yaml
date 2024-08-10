@@ -12,6 +12,10 @@ apps:
   ruptime:
     command: ruptime
 
+layout:
+  runame:
+    symlink: $SNAP/ruptime
+
 #parts:
 #  my-part:
 #    # See 'snapcraft plugins'

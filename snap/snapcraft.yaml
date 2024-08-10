@@ -13,7 +13,7 @@ apps:
     command: ruptime
 
 layout:
-  ruptime:
+  /usr/bin/ruptime:
     symlink: $SNAP/runame
 
 #parts:

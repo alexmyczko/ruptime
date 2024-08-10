@@ -10,7 +10,7 @@ confinement: strict # was devmode use 'strict' once you have the right plugs and
 
 apps:
   ruptime:
-    command: bin/ruptime
+    command: ruptime
 
 #parts:
 #  my-part:

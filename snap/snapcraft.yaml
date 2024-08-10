@@ -13,8 +13,8 @@ apps:
     command: ruptime
 
 layout:
-  /snap/bin/runame:
-    symlink: $SNAP/ruptime
+  /snap/bin/ruptime:
+    symlink: $SNAP/runame
 
 #parts:
 #  my-part:

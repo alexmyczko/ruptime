@@ -21,6 +21,16 @@ apps:
 #    # See 'snapcraft plugins'
 #    plugin: nil
 
+stage-packages:
+  - acct
+  - bc
+  - cron
+  - dmidecode
+  - memtester
+  - netcat-openbsd
+  - openssl,
+  - xz-utils
+
 parts:
   ruptime:
     plugin: dump

@@ -13,8 +13,7 @@ apps:
     command: ruptime
 
 parts:
-  stage-packages:
-    [acct, bc, cron, dmidecode, memtester, netcat-openbsd, openssl, xz-utils]
+  stage-packages: [acct, bc, cron, dmidecode, memtester, netcat-openbsd, openssl, xz-utils]
   ruptime:
     plugin: dump
     source: https://github.com/alexmyczko/ruptime.git

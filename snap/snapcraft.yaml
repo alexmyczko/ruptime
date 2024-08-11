@@ -22,11 +22,6 @@ parts:
     - netcat-openbsd
     - openssl
     - xz-utils
-#  my-part:
-#    # See 'snapcraft plugins'
-#    plugin: nil
-
-parts:
   ruptime:
     plugin: dump
     source: https://github.com/alexmyczko/ruptime.git

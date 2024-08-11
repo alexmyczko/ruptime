@@ -11,6 +11,26 @@ confinement: strict # was devmode use 'strict' once you have the right plugs and
 apps:
   ruptime:
     command: ruptime
+  rhw:
+    command: rhw
+  rsw:
+    command: rsw
+  rwho:
+    command: rwho
+  rdisk:
+    command: rdisk
+  rbench:
+    command: rbench
+  rac:
+    command: rac
+  rboot:
+    command: rboot
+  rload:
+    command: rload
+  rnet:
+    command: rnet
+  runame:
+    command: runame
 
 parts:
   ruptime:

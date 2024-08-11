@@ -12,24 +12,19 @@ apps:
   ruptime:
     command: ruptime
 
-#layout:
-#  /snap/bin/ruptime:
-#    symlink: $SNAP/runame
-
-#parts:
+parts:
+  stage-packages:
+    - acct
+    - bc
+    - cron
+    - dmidecode
+    - memtester
+    - netcat-openbsd
+    - openssl
+    - xz-utils
 #  my-part:
 #    # See 'snapcraft plugins'
 #    plugin: nil
-
-stage-packages:
-  - acct
-  - bc
-  - cron
-  - dmidecode
-  - memtester
-  - netcat-openbsd
-  - openssl,
-  - xz-utils
 
 parts:
   ruptime:

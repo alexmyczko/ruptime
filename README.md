@@ -219,6 +219,12 @@ Installing on macOS
 
 https://github.com/alexmyczko/homebrew-mac/blob/main/ruptime.rb
 
+Installing on Alpine Linux
+
+```
+apk install cmd:lsb_release netcat-openbsd
+```
+
 Installing with Snap
 
 https://snapcraft.io/ruptime
@@ -265,7 +271,7 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 
 ## Starting it
 - FreeBSD: rc.d
-- Linux: daemon, init.d, cron @reboot, systemd
+- Debian GNU/Linux: daemon, init.d, cron @reboot, systemd
 - macOS: https://launchd.info
 
 - without systemd

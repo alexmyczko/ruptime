@@ -222,7 +222,7 @@ https://github.com/alexmyczko/homebrew-mac/blob/main/ruptime.rb
 Installing on Alpine Linux
 
 ```
-apk install cmd:lsb_release netcat-openbsd
+apk install cmd:lsb_release netcat-openbsd cmd:ac
 ```
 
 Installing with Snap

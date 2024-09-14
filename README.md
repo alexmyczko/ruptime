@@ -260,7 +260,7 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 ```
 
 ## Requirements
-- Client: `nc` `xz` `bc` `cron` `dmidecode` `memtester` `timeout` `wireless-tools` `acct`
+- Client: `nc` `xz` `bc` `cron` `memtester` `timeout` `wireless-tools` `acct`
 - Server: `nc` `xz` `tcputils` `daemon`
 - Optionals: `pen` `trickle` `bkt` `iptables` `wireless-tools` `nvidia-smi` `lm-sensors`
 

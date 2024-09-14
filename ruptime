@@ -105,7 +105,7 @@ done)
 	    u=$(printf "%-28s %s\n" "$k" "$rsw" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
 	rhw)
-	    biosdate=$(dmidecode -s bios-release-date 2>/dev/null | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
+	    biosdate=$(cat /sys/class/dmi/id/bios_date | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
             if [ -f /sys/firmware/devicetree/base/compatible ]; then biosdate=$(echo $(cat /sys/firmware/devicetree/base/compatible|tr -d '\0') | sed "s,.*bcm2835.*,2012/03/01,; s,.*bcm2835.*,2014/07/14,; s,.*bcm2836.*,2015/02/02,; s,.*bcm2837.*,2015/02/02,; s,.*bcm2711.*,2019/06/24,; s,.*rp2040.*,2021/11/02,; s,.*bcm2712.*,2023/10/23,; s,.*j314s.*t6000.*,2021/06/06,; s,.*j316s.*t6000.*,2021/06/06,; s,.*j314c.*t6001.*,2021/06/06,; s,.*j316c.*t6001.*,2021/06/06,; s,.*j375c.*t6001.*,2022/06/06,; s,.*j375d.*t6002.*,2022/06/06,; s,.*j414s.*t6020.*,2023/06/06,; s,.*j416s.*t6020.*,2023/06/06,; s,.*j474s.*t6020.*,2023/06/06,; s,.*j414c.*t6021.*,2023/06/06,; s,.*j416c.*t6021.*,2023/06/06,; s,.*j475c.*t6021.*,2023/06/06,; s,.*j180d.*t6022.*,2023/06/06,; s,.*j475d.*t6022.*,2023/06/06,; s,.*j274.*t8103.*,2020/06/06,; s,.*j293.*t8103.*,2020/06/06,; s,.*j313.*t8103.*,2020/06/06,; s,.*j456.*t8103.*,2021/06/06,; s,.*j457.*t8103.*,2021/06/06,; s,.*j413.*t8112.*,2022/06/06,; s,.*j415.*t8112.*,2023/06/06,; s,.*j473.*t8112.*,2023/06/06,; s,.*j493.*t8112.*,2022/06/06,;"); fi
             # if macOS see https://raw.githubusercontent.com/quacktacular/mac-device-id-to-model/main/models.txt
             if [ -d /sys/firmware/efi/ ]; then sys=UEFI; else sys=BIOS; fi

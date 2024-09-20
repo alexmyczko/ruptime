@@ -111,7 +111,7 @@ done)
             if [ -d /sys/firmware/efi/ ]; then sys=UEFI; else sys=BIOS; fi
             # if macOS + arm64 then it's sys=AAPL
             uname -o |grep ^Darwin >/dev/null && uname -m |grep ^arm64 >/dev/null && sys=AAPL
-            cat /sys/firmware/devicetree/base/compatible &>/dev/null | grep raspberry && sys=RASP
+            cat /sys/firmware/devicetree/base/compatible 2>/dev/null | grep raspberry &>/dev/null && sys=RASP
             #/usr/sbin/lsmod|grep "^nvram " >/dev/null && head -1 /proc/driver/nvram |grep not >/dev/null; if [ "$?" -eq 0 ]; then cmos="CMOS+"; else cmos="CMOS-"; fi
             which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
             which free >/dev/null || mem=$(sysctl -n hw.memsize|awk '{printf "%.0f\n", $1/1024/1024/1024}')

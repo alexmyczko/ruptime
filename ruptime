@@ -161,7 +161,7 @@ done)
             u=$(printf "%-28s %s\n" "$k" "users $liun screen/tmux $sotn CPU $cpu gore $r" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
 	rnet)
-            netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}')
+            netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
             s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")
             iwconfig $(echo $s|awk '{print $1}') &>/dev/null; r=$?
             if [ "$r" = 0 ]; then

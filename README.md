@@ -194,25 +194,16 @@ $ diff -y <(ruptime|awk '{print $1}') <(arp -a|sort|awk '{print $1}') | grep '>\
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
-## Installation on DEB based systems
-
-Find the debs in the [release](https://github.com/alexmyczko/ruptime/releases) page.
-
-To download:
-```
-curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.8/ruptimed_1.8-1_all.deb
-curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.8/ruptime_1.8-1_amd64.deb
-curl -LO https://github.com/alexmyczko/ruptime/releases/download/1.8/ruptime_1.8-1_arm64.deb
-```
+## Installation on Debian
 
 To install the client run
 ```
-DEBIAN_FRONTEND=noninteractive apt install ./ruptime_1.8-1_amd64.deb
+apt install ruptime
 ```
 
 To install the server run
 ```
-DEBIAN_FRONTEND=noninteractive apt install ./ruptimed_1.8-1_all.deb
+apt install ruptimed
 ```
 
 Installing on macOS
@@ -224,10 +215,6 @@ Installing on Alpine Linux
 ```
 apk install cmd:lsb_release netcat-openbsd cmd:ac
 ```
-
-Installing with Snap
-
-https://snapcraft.io/ruptime
 
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].

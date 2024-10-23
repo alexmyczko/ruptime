@@ -76,6 +76,9 @@ if [ "${1}x" = "-ux" ]; then
 	    case "$(uname -s)" in
 		Linux|GNU/kFreeBSD)
 		    s=$(echo $(lsb_release -a 2>/dev/null | grep -v ^LSB | grep -v ^Desc | awk '{print $NF}'))
+                    # getting rid of lsb_release
+                    # if /etc/system-release exists take it
+                    # if /etc/os-release exists: cat /etc/os-release | (source /etc/os-release; echo $NAME $VERSION_ID)
 		;;
 		Darwin)
 		    s=$(echo $(sw_vers 2>/dev/null | awk -v OFS="" '{$1=""}{print}'))

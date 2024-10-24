@@ -25,7 +25,6 @@ It is now
 - `rhw` (remote hardware, inventory) - what hardware you have
 - `rload` (remote load of CPU/MEM/GPU/GPUMEM) - usage of hardware
 - `rbench` (remote benchmark) - comparable list of your hardware
-- `rboot` (remote rebootable?) - safety level for a reboot
 - `rnet` (remote network) - networking details (interface name, connection speed)
 - `rdisk` (remote disk) - overview of local disks and their speeds
 - `rac` (remote users' connect time) - overview of usage (see ac[^7])

@@ -74,11 +74,6 @@ orca.ocean.net               enp4s0 	 2500Mb/s
 ```
 
 ```
-$ rboot # FQDN               users   screen/tmux   cpu load
-orca.ocean.net               users 2 screen/tmux 1 CPU 5
-```
-
-```
 $ rbench # FQDN              Memory   Total CPU      Cores
 orca.ocean.net               MEM 5.05 94 GB CPU 6.16 32
 ```
@@ -272,7 +267,6 @@ iptables -A INPUT -p tcp --dport 51300 --match ttl --ttl-gt 1 -j REJECT
 Some metrics are not useful to have at regular intervals, nor at every boot, so collect them when needed, examples:
 
 ```
-rboot -u
 rnet -u
 ```
 

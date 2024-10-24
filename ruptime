@@ -150,19 +150,6 @@ done)
             cpu=$(printf "CPU %.2f %s\n" $(echo $end2 - $start2 | bc) $cores)
             u=$(printf "%-28s %s\n" "$k" "$mem $cpu" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;
-	rboot)
-            r=0
-            # logged in users
-            liun=$(who |grep -v root | awk '{print $1}' |sort -u|wc -l)
-            r=$((r + liun))
-            # screen or tmux sessions
-            sotn=$(ps -ef |grep 'screen\|tmux' |grep -v grep | awk '{print $1 " " $NF}' |sort -u|wc -l)
-            r=$((r + sotn))
-            # something is running
-            cpu=$(uptime | sed s,.*:,,g | sed s/,//g|awk '{printf("%.0f\n",$(NF-2))}')
-            r=$((r + cpu))
-            u=$(printf "%-28s %s\n" "$k" "users $liun screen/tmux $sotn CPU $cpu gore $r" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
 	rnet)
             netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
             s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")

@@ -46,7 +46,8 @@ h=$(echo $f| awk '{print $1}')
 if [ "${ARG}x" = "x" ]; then
     # only query command, deliver results asked for
     if [ "$CMD" = "xz.ruptime" ]; then
-	(find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g";
+	(
+        find $SPOOL/ -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g" |while read a b; do printf "%-28s %s %9s\n" $a $b $(TIME_STYLE=+%s ls -l $SPOOL/${a}.ruptime|awk -vNOW=$(date +%s) '{print ((NOW-$(6))/60) }'); done;
 	find $SPOOL/ -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
     fi
     for a in runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do

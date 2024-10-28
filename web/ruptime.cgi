@@ -53,6 +53,7 @@ for a in $(grep ruptime /usr/bin/ruptime  |head -1 |sed "s,.*in ,,;s,;.*,,"); do
 done
 cat << TOPRIGHT
 <div class="topright">
+<a href="?query=network">network</a>
 <a href="?query=stats">stats</a>
 </div>
 TOPRIGHT
@@ -63,4 +64,26 @@ cat << BOTTOMRIGHT
 BOTTOMRIGHT
 echo "<pre>"
 $run
+if [ "$sel" = "network" ]; then
+    d=$(hostname -d)
+    echo Network information for $d
+    host -t soa $d
+    host -t ns $d
+    host -t mx $d
+    whois $(host $(hostname -d) | awk '{print $NF}'|head -1)|grep CIDR
+fi
+if [ "$sel" = "stats" ]; then
+    #echo MOO
+down=$(ruptime|grep down$|wc -l)
+up=$(ruptime|grep -v down$|wc -l)
+total=$(ruptime|wc -l)
+
+echo Hosts without GPU $(rload |awk '{if (NF!=5) print}'|wc -l)
+echo Hosts with GPU $(rload |awk '{if (NF==5) print}'|wc -l)
+
+echo Total cores $(rhw |awk '{print $4}'|datamash sum 1)
+echo Total memory in GB $(rhw |awk '{print $5}'|datamash sum 1)
+
+echo Hosts up/Total hosts [$up/$total]
+fi
 echo "<br>"

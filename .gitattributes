@@ -1,5 +1,3 @@
 .gitattributes  export-ignore
 .ruptime.png    export-ignore
 .ruptime-icon.png    export-ignore
-org.flatpak.ruptime.yml  export-ignore
-snap/snapcraft.yaml   export-ignore

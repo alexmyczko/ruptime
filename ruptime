@@ -49,8 +49,7 @@ fi
 
 # initialize all host information
 if [ "${1}x" = "-ix" ]; then
-    all=$(grep ln $(which ruptime) |sed "s,.*in\ ,,;s,;.*,,"|head -1)
-    for a in $all; do
+    for a in $ENABLED; do
         echo Initializing $a
         $a -u
     done
@@ -59,9 +58,8 @@ fi
 
 # show all values of the host
 if [ "${1}x" = "-ax" ]; then
-    all=$(grep ln $(which ruptime) |sed "s,.*in\ ,,;s,;.*,,"|head -1)
     k=$(eval "$HOSTNAMECMD")
-    for a in $all; do
+    for a in $ENABLED; do
         #echo Initializing $a
         $a | grep $k
     done

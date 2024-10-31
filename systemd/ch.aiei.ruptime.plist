@@ -1,0 +1,35 @@
+?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>KeepAlive</key>
+    <dict>
+	<key>NetworkState</key>
+	<true/>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+	<string>/bin:/usr/bin:/usr/local/bin:/opt/homebrew/bin</string>
+    </dict>
+
+    <key>WorkingDirectory</key>
+    <string>/tmp</string>
+
+    <key>Label</key>
+    <string>ch.aiei.ruptime</string>
+
+    <key>ProgramArguments</key>
+    <array>
+	<string>/opt/homebrew/bin/ruptime</string>
+        <string>-u</string>
+    </array>
+
+    <key>StartInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

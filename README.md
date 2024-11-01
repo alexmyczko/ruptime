@@ -99,7 +99,7 @@ us       fish.ocean.net:pts/3        2023-06-28 06:33 (44.44.44.44)
 -i   Initialize the software
 -m   Multisite ruptime
 -o   Overview
--u   Upload information to the server (NOTE: this might require root permission and get restricted to the root user in the future)
+-u   Upload information to the server
 -v   Print license/version and quit
 ```
 

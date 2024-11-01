@@ -188,7 +188,7 @@ $ diff -y <(ruptime|awk '{print $1}') <(arp -a|sort|awk '{print $1}') | grep '>\
 
 Sometimes `nl` or `ts` (from `moreutils`) are useful as well.
 
-## Installation on Debian
+## Installation
 
 To install the client run
 ```

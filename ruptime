@@ -116,7 +116,7 @@ if [ "${1}x" = "-ux" ]; then
 				which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper --no-refresh search --installed-only | grep -c "package$"); fi
 				if [ "${num}x" != x ]; then echo -ne "$a $num "; fi
 			done)
-			if [ -d /Applications ]; then rsw="${rsw}Applications $(ls /Applications 2>/dev/null | wc -l| awk '{print $1}')"; fi
+			if [ -d /Applications ]; then rsw="${rsw}Applications $(find /Applications -maxdepth 1 -mindepth 1 2>/dev/null | wc -l| awk '{print $1}')"; fi
 			u=$(printf "%-28s %s\n" "$k" "$rsw" | encrypt)
 			;;
 		rhw)
@@ -154,24 +154,23 @@ if [ "${1}x" = "-ux" ]; then
 		rbench)
 			dt=$(which date)
 			which gdate >/dev/null && dt=$(which gdate)
-			which free >/dev/null && m=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
-			which free >/dev/null || m=$(sysctl -n hw.memsize|awk '{printf "%.0f\n", $1/1024/1024/1024}')
+			which free >/dev/null && m=$(free -b |grep '^Mem:' | awk '{printf "%d\n", $2/1024^3}')
+			which free >/dev/null || m=$(sysctl -n hw.memsize| awk '{printf "%d\n", $1/1024^3}')
 			start=$($dt +%s.%N)
 			memtester 16M 1 &>/dev/null
 			end=$($dt +%s.%N)
-			mem=$(printf "MEM %.2f %s GB" "$(echo "scale=2; $end - $start" | bc)" "$m")
-			arch=$(uname -m)
+			mem=$(echo "$end $start $m"| awk '{printf "MEM %.2f %s GB\n", $1-$2, $3}')
 			cores=$(getconf _NPROCESSORS_ONLN)
 			start2=$($dt +%s.%N)
 			echo 'scale=3000;4*a(1)' | bc -l &>/dev/null
 			end2=$($dt +%s.%N)
-			cpu=$(printf "CPU %.2f %s\n" "$(echo "$end2 - $start2" | bc)" "$cores")
-			u=$(printf "%-28s %s\n" "$k" "$mem $cpu" | encrypt)
+			cpu=$(echo "$end2 $start2 $cores"| awk '{printf "CPU %.2f %s\n", $1-$2, $3}')
+			u=$(printf "%-28s %s %s\n" "$k" "$mem" "$cpu" | encrypt)
 			;;
 		rnet)
-			netdev=$(p route show to default |head -n1 | cut -d\  -f5)
+			netdev=$(ip route show to default |head -n1 | cut -d\  -f5)
 			s="$netdev $(cat "/sys/class/net/${netdev}/speed" 2>/dev/null)Mb/s"
-			if iwconfig "$netdev" >/de/null; then
+			if iwconfig "$netdev" &>/dev/null; then
 				l=$(iwconfig 2>/dev/null|grep "Link Quality=" | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l)
 				s2=$(iwconfig "$s" 2>/dev/null|grep "Bit Rate" | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}')
 				u=$(printf "%-28s %s %s %.0f\n" "$k" "$s" "$s2" "$l" | encrypt)
@@ -185,7 +184,7 @@ if [ "${1}x" = "-ux" ]; then
 			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 			;;
 		rdisk)
-			s=$(echo $(for a in $(ls /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null |grep ^Disk | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))
+			s="$(for a in $(find /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* -maxdepth 0 2>/dev/null | sed s,/dev/,,); do echo "$a" "$(fdisk -l "/dev/$a" 2>/dev/null |grep ^Disk | awk '{printf "%1.0f\n", $5/1000/1000/1000;exit}')"; done)"
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;
@@ -193,8 +192,9 @@ if [ "${1}x" = "-ux" ]; then
 			s=$(uptime | sed "s/,//g" | awk -v c="$(getconf _NPROCESSORS_ONLN)" '{printf "%6.2f\n", $(NF-2)*100/c}')
 			case "$(uname -s)" in
 				Linux)
-					gpu=$(which nvidia-smi >/dev/null && printf "%6.2f %6.2f\n" $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv |sed 1d|sed "s/%//g;s/MiB//g;s/,//g;s/  / /g"|awk '{for(i=1;i<=NF;i++)s[i]+=$i}END{for(i=1;i<=NF;i++)printf("%.2f \n",s[i]/NR)}'))
-					m=$(printf "%6.2f\n" "$(free -m -t |tail -1 |awk '{print 100*$3/$2}')")
+					# shellcheck disable=SC2183,SC2046
+					gpu=$(which nvidia-smi >/dev/null && printf '%6.2f %6.2f\n' $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits |tr -d ','))
+					m="$(free -m -t |awk '/^Total:/{printf "%.2f\n", 100*$3/$2}')"
 					;;
 				Darwin)
 					total=$(sysctl hw.memsize | awk '{print $NF}')
@@ -202,7 +202,7 @@ if [ "${1}x" = "-ux" ]; then
 					m=$(printf "%6.2f\n" "$(echo "$total $used" |awk '{print 100*$3/$2}')")
 					;;
 			esac
-			u=$(printf "%-28s %s %s %s\n" "$k" "$s" "$m" "$gpu" | encrypt)
+			u=$(printf "%-28s %-6s %-6s %-6s\n" "$k" "$s" "$m" "$gpu" | encrypt)
 			;;
 		*)
 			echo "PROTOCOL ERROR"

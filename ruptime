@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 ((DEBUG)) && set -x
 export LC_ALL=C
-#d=$(basename "$0")
-#pgrep "$d -u" >/dev/null && exit 0
 
 # Defaults
 SERVER=localhost
@@ -113,7 +111,7 @@ if [ "${1}x" = "-ux" ]; then
 				which $a &>/dev/null && if [ $a == "spack" ]; then num=$(spack find 2>/dev/null | wc -l); fi
 				which $a &>/dev/null && if [ $a == "snap" ]; then num=$(snap list |sed 1d | wc -l); fi
 				which $a &>/dev/null && if [ $a == "flatpak" ]; then num=$(flatpak list | wc -l); fi
-				which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper --no-refresh search --installed-only | grep -c "package$"); fi
+				which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper --no-refresh search --installed-only | grep -c 'package$'); fi
 				if [ "${num}x" != x ]; then echo -ne "$a $num "; fi
 			done)
 			if [ -d /Applications ]; then rsw="${rsw}Applications $(find /Applications -maxdepth 1 -mindepth 1 2>/dev/null | wc -l| awk '{print $1}')"; fi
@@ -126,10 +124,10 @@ if [ "${1}x" = "-ux" ]; then
 			# if macOS see https://raw.githubusercontent.com/quacktacular/mac-device-id-to-model/main/models.txt
 			if [ -d /sys/firmware/efi/ ]; then sys=UEFI; else sys=BIOS; fi
 			# if macOS + arm64 then it's sys=AAPL
-			uname -o |grep ^Darwin >/dev/null && uname -m |grep ^arm64 >/dev/null && sys=AAPL
+			uname -o |grep '^Darwin' >/dev/null && uname -m |grep '^arm64' >/dev/null && sys=AAPL
 			grep -q raspberry /sys/firmware/devicetree/base/compatible 2>/dev/null && sys=RASP
 			#/usr/sbin/lsmod|grep "^nvram " >/dev/null && head -1 /proc/driver/nvram |grep not >/dev/null; if [ "$?" -eq 0 ]; then cmos="CMOS+"; else cmos="CMOS-"; fi
-			which free >/dev/null && mem=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
+			which free >/dev/null && mem=$(free -b | awk '/^Mem:/ {printf "%.0f\n", $2/1024/1024/1024}')
 			which free >/dev/null || mem=$(sysctl -n hw.memsize|awk '{printf "%.0f\n", $1/1024/1024/1024}')
 			cores=$(getconf _NPROCESSORS_ONLN)
 			gpu=0; which nvidia-smi >/dev/null && gpu=$(nvidia-smi -L | wc -l)
@@ -154,7 +152,7 @@ if [ "${1}x" = "-ux" ]; then
 		rbench)
 			dt=$(which date)
 			which gdate >/dev/null && dt=$(which gdate)
-			which free >/dev/null && m=$(free -b |grep '^Mem:' | awk '{printf "%d\n", $2/1024^3}')
+			which free >/dev/null && m=$(free -b | awk '/^Mem:/ {printf "%d\n", $2/1024^3}')
 			which free >/dev/null || m=$(sysctl -n hw.memsize| awk '{printf "%d\n", $1/1024^3}')
 			start=$($dt +%s.%N)
 			memtester 16M 1 &>/dev/null
@@ -171,12 +169,10 @@ if [ "${1}x" = "-ux" ]; then
 			netdev=$(ip route show to default |head -n1 | cut -d\  -f5)
 			s="$netdev $(cat "/sys/class/net/${netdev}/speed" 2>/dev/null)Mb/s"
 			if iwconfig "$netdev" &>/dev/null; then
-				l=$(iwconfig 2>/dev/null|grep "Link Quality=" | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l)
-				s2=$(iwconfig "$s" 2>/dev/null|grep "Bit Rate" | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}')
+				l=$(iwconfig 2>/dev/null|grep 'Link Quality=' | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l)
+				s2=$(iwconfig "$s" 2>/dev/null|grep 'Bit Rate' | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}')
 				u=$(printf "%-28s %s %s %.0f\n" "$k" "$s" "$s2" "$l" | encrypt)
 			else
-				netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
-				s="$netdev  $(cat "/sys/class/net/${netdev}/speed" 2>/dev/null)Mb/s"
 				u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			fi
 			# macOS
@@ -188,7 +184,7 @@ if [ "${1}x" = "-ux" ]; then
 			s="$(for a in /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* ; do
 				size=
 				if fdisk -l "$a" >/dev/null 2>&1; then
-					size="$(fdisk -l "$a" |grep '^Disk' | awk '{printf "%1.0f\n", $5/1000/1000/1000;exit}')"
+					size="$(fdisk -l "$a" | awk '/^Disk/ {printf "%1.0f\n", $5/1000/1000/1000;exit}')"
 					echo -n "${a#/dev/} $size "
 				fi
 			done)"

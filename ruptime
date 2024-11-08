@@ -184,7 +184,15 @@ if [ "${1}x" = "-ux" ]; then
 			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 			;;
 		rdisk)
-			s="$(for a in $(find /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* -maxdepth 0 2>/dev/null | sed s,/dev/,,); do echo "$a" "$(fdisk -l "/dev/$a" 2>/dev/null |grep ^Disk | awk '{printf "%1.0f\n", $5/1000/1000/1000;exit}')"; done)"
+			shopt -s nullglob
+			s="$(for a in /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* ; do
+				size=
+				if fdisk -l "$a" >/dev/null 2>&1; then
+					size="$(fdisk -l "$a" |grep '^Disk' | awk '{printf "%1.0f\n", $5/1000/1000/1000;exit}')"
+					echo -n "${a#/dev/} $size "
+				fi
+			done)"
+			shopt -u nullglob
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;

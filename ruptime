@@ -139,15 +139,15 @@ if [ "${1}x" = "-ux" ]; then
 			nu=$(ac -p |sed 1d |wc -l)
 			u=$(printf "%-28s %s %s\n" "$k" "$ac" "$nu" | encrypt)
 			;;
-	rwho)
-            w=$(who |sed "s/ [a-zA-Z:]/ $(eval "$HOSTNAMECMD"):&/1;s,: ,:,1")
-            wl=$(echo -n "$w"|wc -l)
-            if [ ${wl} != 0 ]; then
-                u=$(printf "%s\n" "$w" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-            else
-                exit 0
-            fi
-	;;
+		rwho)
+			w=$(who |sed 's/ [a-zA-Z:]/ '"$k"':&/1;s,: ,:,1')
+			wl=$(echo -n "$w"|wc -l)
+			if [ "${wl}" -ne 0 ]; then
+				u=$(printf "%s\n" "$w" | encrypt)
+			else
+				exit 0
+			fi
+			;;
 	rbench)
 	    dt=date
             which gdate >/dev/null && dt=$(which gdate)

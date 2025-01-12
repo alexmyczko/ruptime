@@ -134,11 +134,11 @@ if [ "${1}x" = "-ux" ]; then
 			u=$(printf "%-28s %s\n" "$k" "$biosdate $sys $cores $mem $gpu" | encrypt)
 			# macOS system_profiler SPHardwareDataType
 			;;
-	rac)
-	    ac=$(ac | awk '{print $2}')
-	    nu=$(ac -p |sed 1d |wc -l)
-	    u=$(printf "%-28s %s %s\n" "$k" "$ac" "$nu" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
+		rac)
+			ac=$(ac | awk '{print $2}')
+			nu=$(ac -p |sed 1d |wc -l)
+			u=$(printf "%-28s %s %s\n" "$k" "$ac" "$nu" | encrypt)
+			;;
 	rwho)
             w=$(who |sed "s/ [a-zA-Z:]/ $(eval "$HOSTNAMECMD"):&/1;s,: ,:,1")
             wl=$(echo -n "$w"|wc -l)

@@ -97,24 +97,25 @@ if [ "${1}x" = "-ux" ]; then
 			uptime=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g')
 			u=$(echo "$uptime" |awk -v h="$k" '{$1="";printf "%-28s %s %12s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | encrypt)
 			;;
-	rsw)
-rsw=$(for a in apk dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
-    num=""
-    which $a &>/dev/null && if [ $a == "apk" ]; then num=$(apk info | wc -l); fi
-    which $a &>/dev/null && if [ $a == "dpkg" ]; then num=$(dpkg -l |grep ^ii |wc -l); fi
-    which $a &>/dev/null && if [ $a == "rpm" ]; then num=$(rpm -qa | wc -l); fi
-    which $a &>/dev/null && if [ $a == "brew" ]; then num=$(brew list| wc -l); fi
-    which $a &>/dev/null && if [ $a == "pip2" ]; then num=$(pip2 list 2>/dev/null | wc -l); fi
-    which $a &>/dev/null && if [ $a == "pip3" ]; then num=$(pip3 list --local 2>/dev/null |sed "1,2d" |wc -l); fi
-    which $a &>/dev/null && if [ $a == "spack" ]; then num=$(spack find 2>/dev/null |wc -l); fi
-    which $a &>/dev/null && if [ $a == "snap" ]; then num=$(snap list |sed 1d |wc -l); fi
-    which $a &>/dev/null && if [ $a == "flatpak" ]; then num=$(flatpak list | wc -l); fi
-    which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper search --installed-only | grep package$ | wc -l); fi
-    if [ ${num}x != x ]; then echo -ne "$a $(echo $num) "; fi
-done)
-    	    if [ -d /Applications ]; then rsw="${rsw}Applications $(ls /Applications 2>/dev/null |wc -l|awk '{print $1}')"; fi
-	    u=$(printf "%-28s %s\n" "$k" "$rsw" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
+		rsw)
+			rsw=$(for a in apk dpkg rpm nix snap spack flatpak pip2 pip3 pipx brew zypper; do
+				num=""
+				which $a &>/dev/null && if [ $a == "apk" ]; then num=$(apk info | wc -l); fi
+				which $a &>/dev/null && if [ $a == "dpkg" ]; then num=$(dpkg -l | grep -c '^ii'); fi
+				which $a &>/dev/null && if [ $a == "rpm" ]; then num=$(rpm -q -a --qf "i\n" | wc -l); fi
+				which $a &>/dev/null && if [ $a == "brew" ]; then num=$(brew list| wc -l); fi
+				which $a &>/dev/null && if [ $a == "pip2" ]; then num=$(pip2 list 2>/dev/null | wc -l); fi
+				which $a &>/dev/null && if [ $a == "pip3" ]; then num=$(pip3 list --local 2>/dev/null |sed "1,2d" | wc -l); fi
+				which $a &>/dev/null && if [ $a == "pipx" ]; then num=$(pipx list --short 2>/dev/null | wc -l); fi
+				which $a &>/dev/null && if [ $a == "spack" ]; then num=$(spack find 2>/dev/null | wc -l); fi
+				which $a &>/dev/null && if [ $a == "snap" ]; then num=$(snap list |sed 1d | wc -l); fi
+				which $a &>/dev/null && if [ $a == "flatpak" ]; then num=$(flatpak list | wc -l); fi
+				which $a &>/dev/null && if [ $a == "zypper" ]; then num=$(zypper --no-refresh search --installed-only | grep -c 'package$'); fi
+				if [ "${num}x" != x ]; then echo -ne "$a $num "; fi
+			done)
+			if [ -d /Applications ]; then rsw="${rsw}Applications $(find /Applications -maxdepth 1 -mindepth 1 2>/dev/null | wc -l| awk '{print $1}')"; fi
+			u=$(printf "%-28s %s\n" "$k" "$rsw" | encrypt)
+			;;
 	rhw)
 	    biosdate=$(cat /sys/class/dmi/id/bios_date | sed 's,/, ,g'|awk '{print $3"/"$1"/"$2}')
             if [ -f /sys/firmware/devicetree/base/compatible ]; then biosdate=$(echo $(cat /sys/firmware/devicetree/base/compatible|tr -d '\0') | sed "s,.*bcm2835.*,2012/03/01,; s,.*bcm2835.*,2014/07/14,; s,.*bcm2836.*,2015/02/02,; s,.*bcm2837.*,2015/02/02,; s,.*bcm2711.*,2019/06/24,; s,.*rp2040.*,2021/11/02,; s,.*bcm2712.*,2023/10/23,; s,.*j314s.*t6000.*,2021/06/06,; s,.*j316s.*t6000.*,2021/06/06,; s,.*j314c.*t6001.*,2021/06/06,; s,.*j316c.*t6001.*,2021/06/06,; s,.*j375c.*t6001.*,2022/06/06,; s,.*j375d.*t6002.*,2022/06/06,; s,.*j414s.*t6020.*,2023/06/06,; s,.*j416s.*t6020.*,2023/06/06,; s,.*j474s.*t6020.*,2023/06/06,; s,.*j414c.*t6021.*,2023/06/06,; s,.*j416c.*t6021.*,2023/06/06,; s,.*j475c.*t6021.*,2023/06/06,; s,.*j180d.*t6022.*,2023/06/06,; s,.*j475d.*t6022.*,2023/06/06,; s,.*j274.*t8103.*,2020/06/06,; s,.*j293.*t8103.*,2020/06/06,; s,.*j313.*t8103.*,2020/06/06,; s,.*j456.*t8103.*,2021/06/06,; s,.*j457.*t8103.*,2021/06/06,; s,.*j413.*t8112.*,2022/06/06,; s,.*j415.*t8112.*,2023/06/06,; s,.*j473.*t8112.*,2023/06/06,; s,.*j493.*t8112.*,2022/06/06,;"); fi

@@ -191,32 +191,29 @@ if [ "${1}x" = "-ux" ]; then
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;
-	;;
-	rload)
-	    s=$(uptime | sed "s/,//g" | awk -v c=$(getconf _NPROCESSORS_ONLN) '{printf "%6.2f\n", $(NF-2)*100/c}')
-	    case "$(uname -s)" in
-		Linux)
-                    gpu=$(which nvidia-smi >/dev/null && printf "%6.2f %6.2f\n" $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv |sed 1d|sed "s/%//g;s/MiB//g;s/,//g;s/  / /g"|awk '{for(i=1;i<=NF;i++)s[i]+=$i}END{for(i=1;i<=NF;i++)printf("%.2f \n",s[i]/NR)}'))
-		    m=$(printf "%6.2f\n" $(free -m -t |tail -1 |awk '{print 100*$3/$2}'))
-		;;
-		Darwin)
-		    total=$(sysctl hw.memsize | awk '{print $NF}')
-		    used=$(top -l 1 | grep PhysMem: |sed "s/M//g"|awk '{print $2*1024*1024}')
-		    m=$(printf "%6.2f\n" $(echo Mem: $total $used |awk '{print 100*$3/$2}'))
-		;;
-	    esac
-	    u=$(printf "%-28s %s %s %s %s\n" "$k" "$s" "$m" "$gpu" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
-	*)
-	    echo "PROTOCOL ERROR"
-	    exit 1
-	;;
-    esac
-    echo "$d $u" | nc "$SERVER" "$PORT"
-    exit 0
+		rload)
+			s=$(uptime | sed "s/,//g" | awk -v c="$(getconf _NPROCESSORS_ONLN)" '{printf "%6.2f\n", $(NF-2)*100/c}')
+			case "$(uname -s)" in
+				Linux)
+					# shellcheck disable=SC2183,SC2046
+					gpu=$(which nvidia-smi >/dev/null && printf '%6.2f %6.2f\n' $(timeout 29 nvidia-smi --query-gpu=utilization.gpu,utilization.memory --format=csv,noheader,nounits |tr -d ','))
+					m="$(free -m -t |awk '/^Total:/{printf "%.2f\n", 100*$3/$2}')"
+					;;
+				Darwin)
+					total=$(sysctl hw.memsize | awk '{print $NF}')
+					used=$(top -l 1 | grep PhysMem: |sed "s/M//g"|awk '{print $2*1024*1024}')
+					m=$(printf "%6.2f\n" "$(echo "$total $used" |awk '{print 100*$3/$2}')")
+					;;
+			esac
+			u=$(printf "%-28s %-6s %-6s %-6s\n" "$k" "$s" "$m" "$gpu" | encrypt)
+			;;
+		*)
+			echo "PROTOCOL ERROR"
+			exit 1
+			;;
+	esac
+	echo "$d $u" | nc "$SERVER" "$PORT"
+	exit 0
 fi
 
-d=$(basename "$0")
-(echo xz."$d") |
-(nc "$SERVER" "$PORT") |
-(openssl enc -d -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out - | xz -d 2>/dev/null || echo "NO DATA FOUND ($?)" 1>&2)
+viewstatus

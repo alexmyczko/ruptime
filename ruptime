@@ -164,23 +164,20 @@ if [ "${1}x" = "-ux" ]; then
 			cpu=$(echo "$end2 $start2 $cores"| awk '{printf "CPU %.2f %s\n", $1-$2, $3}')
 			u=$(printf "%-28s %s %s\n" "$k" "$mem" "$cpu" | encrypt)
 			;;
-	rnet)
-            netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
-            s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")
-            iwconfig $(echo $s|awk '{print $1}') &>/dev/null; r=$?
-            if [ "$r" = 0 ]; then
-                l=$(iwconfig $s 2>/dev/null|grep "Link Quality=" | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l);\
-                s2=$(iwconfig $s 2>/dev/null|grep "Bit Rate" | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}'); \
-                u=$(printf "%-28s %s %s %.0f\n" "$k" "$s" "$s2" "$l" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-            else
-                netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
-                s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")
-                u=$(printf "%-28s %s\n" "$k" "$s" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-            fi
-	    # macOS
-            # scutil --nwi |tail -1|awk '{print $NF}'
-            # /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
-	;;
+		rnet)
+			netdev=$(ip route show to default |head -n1 | cut -d\  -f5)
+			s="$netdev $(cat "/sys/class/net/${netdev}/speed" 2>/dev/null)Mb/s"
+			if iwconfig "$netdev" &>/dev/null; then
+				l=$(iwconfig 2>/dev/null|grep 'Link Quality=' | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l)
+				s2=$(iwconfig "$s" 2>/dev/null|grep 'Bit Rate' | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}')
+				u=$(printf "%-28s %s %s %.0f\n" "$k" "$s" "$s2" "$l" | encrypt)
+			else
+				u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
+			fi
+			# macOS
+			# scutil --nwi |tail -1|awk '{print $NF}'
+			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
+			;;
 	rdisk)
 	    s=$(echo $(for a in $(ls /dev/ada? /dev/sd? /dev/xvd? /dev/vd? /dev/nvme?n1 /dev/mmcblk? /dev/md[0-9]* 2>/dev/null | sed s,/dev/,,); do echo $a $(fdisk -l /dev/$a 2>/dev/null |grep ^Disk | awk '{printf "%1.0f\n", $5/1000/1000/1000}' | head -1); done))
             u=$(printf "%-28s %s\n" "$k" "$s" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)

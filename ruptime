@@ -148,23 +148,22 @@ if [ "${1}x" = "-ux" ]; then
 				exit 0
 			fi
 			;;
-	rbench)
-	    dt=date
-            which gdate >/dev/null && dt=$(which gdate)
-            which free >/dev/null && m=$(free -b |grep ^Mem: |awk '{printf "%.0f\n", $2/1024/1024/1024}')
-            which free >/dev/null || m=$(sysctl -n hw.memsize|awk '{printf "%.0f\n", $1/1024/1024/1024}')
-            start=$($dt +%s.%N)
-            memtester 16M 1 &>/dev/null
-            end=$($dt +%s.%N)
-            mem=$(printf "MEM %.2f %s GB" $(echo $end - $start | bc) $m)
-            arch=$(uname -m)
-            cores=$(getconf _NPROCESSORS_ONLN)
-            start2=$($dt +%s.%N)
-            /bin/echo "scale=3000;4*a(1)" | bc -l &>/dev/null
-            end2=$($dt +%s.%N)
-            cpu=$(printf "CPU %.2f %s\n" $(echo $end2 - $start2 | bc) $cores)
-            u=$(printf "%-28s %s\n" "$k" "$mem $cpu" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
+		rbench)
+			dt=$(which date)
+			which gdate >/dev/null && dt=$(which gdate)
+			which free >/dev/null && m=$(free -b | awk '/^Mem:/ {printf "%d\n", $2/1024^3}')
+			which free >/dev/null || m=$(sysctl -n hw.memsize| awk '{printf "%d\n", $1/1024^3}')
+			start=$($dt +%s.%N)
+			memtester 16M 1 &>/dev/null
+			end=$($dt +%s.%N)
+			mem=$(echo "$end $start $m"| awk '{printf "MEM %.2f %s GB\n", $1-$2, $3}')
+			cores=$(getconf _NPROCESSORS_ONLN)
+			start2=$($dt +%s.%N)
+			echo 'scale=3000;4*a(1)' | bc -l &>/dev/null
+			end2=$($dt +%s.%N)
+			cpu=$(echo "$end2 $start2 $cores"| awk '{printf "CPU %.2f %s\n", $1-$2, $3}')
+			u=$(printf "%-28s %s %s\n" "$k" "$mem" "$cpu" | encrypt)
+			;;
 	rnet)
             netdev=$(ip r |grep ^default |head -1|sed "s,.*dev ,,g" |awk '{print $1}'|head -1)
             s=$(echo "$netdev   $(cat /sys/class/net/${netdev}/speed)Mb/s")

@@ -59,37 +59,40 @@ fi
 
 # initialize all host information
 if [ "${1}x" = "-ix" ]; then
-    for a in $ENABLED; do
-        echo Initializing $a
-        $a -u
-    done
-    exit 0
+	for a in $ENABLED; do
+		echo "Initializing $a"
+		$a -u
+	done
+	exit 0
 fi
 
+k="$(eval "$HOSTNAMECMD")"
 # show all values of the host
 if [ "${1}x" = "-ax" ]; then
-    k=$(eval "$HOSTNAMECMD")
-    for a in $ENABLED; do
-        #echo Initializing $a
-        $a | grep $k
-    done
-    exit 0
+	for a in $ENABLED; do
+		#echo Initializing $a
+		$a | grep "$k"
+	done
+	exit 0
 fi
 if [ "${1}x" = "-ux" ]; then
-    k=$(eval "$HOSTNAMECMD")
-    case "$d" in
-	runame)
-	    case "$(uname -s)" in
-		Linux|GNU/kFreeBSD)
-                    if [ -f /etc/system-release ]; then s=$(cat /etc/system-release); fi
-                    if [ -f /etc/os-release ]; then s=$(source /etc/os-release; echo $NAME $VERSION_ID); fi
-		;;
-		Darwin)
-		    s=$(echo $(sw_vers 2>/dev/null | awk -v OFS="" '{$1=""}{print}'))
-		;;
-	    esac
-	    u=$(printf "%-28s %s, %s\n" "$k" "`uname -srm`" "$s" | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
+	case "$d" in
+		runame)
+			case "$(uname -s)" in
+				Linux|GNU/kFreeBSD)
+					if [ -r /etc/system-release ]; then
+						s=$(cat /etc/system-release)
+					fi
+					if [ -f /etc/os-release ]; then
+						s=$(source /etc/os-release; echo "$NAME $VERSION_ID")
+					fi
+					;;
+				Darwin)
+					s="$(sw_vers 2>/dev/null | awk 'OFS="";{$1=""}{print}')"
+					;;
+			esac
+			u=$(printf "%-28s %s, %s\n" "$k" "$(uname -srm)" "$s" | encrypt)
+			;;
 	ruptime)
 	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %12s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
 	;;

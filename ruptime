@@ -93,9 +93,10 @@ if [ "${1}x" = "-ux" ]; then
 			esac
 			u=$(printf "%-28s %s, %s\n" "$k" "$(uname -srm)" "$s" | encrypt)
 			;;
-	ruptime)
-	    u=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g'|awk -v h=$(eval "$HOSTNAMECMD") '{$1="";printf "%-28s %s %12s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -)
-	;;
+		ruptime)
+			uptime=$(uptime|sed 's/ days\{0,1\},[[:blank:]]\{1,\}/+/; s/ averages\{0,1\}://; s/ min//;s/,//g')
+			u=$(echo "$uptime" |awk -v h="$k" '{$1="";printf "%-28s %s %12s %2s %5s %s %6s %6s %6s\n", h, $2, $3, $4, $5, $6, $7, $8, $9}' | encrypt)
+			;;
 	rsw)
 rsw=$(for a in apk dpkg rpm nix snap spack flatpak pip2 pip3 brew zypper; do
     num=""

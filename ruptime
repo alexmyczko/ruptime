@@ -166,7 +166,9 @@ if [ "${1}x" = "-ux" ]; then
 			;;
 		rnet)
 			netdev=$(ip route show to default |head -n1 | cut -d\  -f5)
-			s="$netdev $(cat "/sys/class/net/${netdev}/speed" 2>/dev/null)Mb/s"
+			if cat /sys/class/net/"${netdev}"/speed 2>/dev/null; then
+				s="$netdev $(cat /sys/class/net/"${netdev}"/speed)Mb/s"
+			fi
 			if iwconfig "$netdev" &>/dev/null; then
 				l=$(iwconfig 2>/dev/null|grep 'Link Quality=' | sed "s,Link Quality=,," | awk '{print "scale=2; "$1"*100"}' | bc -l)
 				s2=$(iwconfig "$s" 2>/dev/null|grep 'Bit Rate' | sed "s,Bit Rate=,,;s, Mb,Mb,"|awk '{print $1}')
@@ -179,7 +181,7 @@ if [ "${1}x" = "-ux" ]; then
 			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 			;;
 		rdisk)
-			lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f\n", $1, $2/1024^3}'
+			s=$(lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f\n", $1, $2/1024^3}')
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;

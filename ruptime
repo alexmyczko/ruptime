@@ -140,7 +140,7 @@ if [ "${1}x" = "-ux" ]; then
 			u=$(printf "%-28s %s %s\n" "$k" "$ac" "$nu" | encrypt)
 			;;
 		rwho)
-			w=$(who |sed 's/ [a-zA-Z:]/ '"$k"':&/1;s,: ,:,1')
+                        w=$(who |sed 's/\b+[a-zA-Z:]/\b'"{k}"'i:&/1;s,: ,:,1')
 			wl=$(echo -n "$w"|wc -l)
 			if [ "${wl}" -ne 0 ]; then
 				u=$(printf "%s\n" "$w" | encrypt)

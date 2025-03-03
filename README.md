@@ -213,7 +213,7 @@ apk install cmd:lsb_release netcat-openbsd cmd:ac
 ## Configuration
 The defaults for rwhod/ruptime is downtime after 11' (11\*60 seconds)[^3] (ISDOWN), status messages are originally generated approximately every 3' (AL_INTERVAL)[^4].
 ```
-SERVER=wedonthaveaprivacyproblem.com
+SERVER=aiei.ch
 PORT=51300
 HOSTNAMECMD='hostname -f'
 ```

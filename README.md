@@ -286,6 +286,7 @@ ethtool -i $(ifconfig|grep -v "^$"|sed "s,:.*,,"|grep -v "^ "|grep -v ^lo|head -
 nvme smart-log /dev/nvme0n1
 badblocks -sv /dev/sda
 sensors
+rmmod usbhid                      # disable usb input devices
 efivar -l |grep -i PasswordMode   # check if a uefi bios password is set (no output, no password)
 ipmitool dcmi power reading       # power usage
 ```

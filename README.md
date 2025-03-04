@@ -287,6 +287,7 @@ nvme smart-log /dev/nvme0n1
 badblocks -sv /dev/sda
 sensors
 rmmod usbhid                      # disable usb input devices
+dmidecode --type 0                # check if your hw is uefi capable
 efivar -l |grep -i PasswordMode   # check if a uefi bios password is set (no output, no password)
 ipmitool dcmi power reading       # power usage
 ```

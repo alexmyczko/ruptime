@@ -181,7 +181,7 @@ if [ "${1}x" = "-ux" ]; then
 			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 			;;
 		rdisk)
-			s=$(lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f\n", $1, $2/1024^3}')
+			s=$(lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f\n", $1, $2/1024^3}'|tr '\n' ' ')
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;

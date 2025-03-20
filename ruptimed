@@ -50,14 +50,14 @@ if [ "${ARG}x" = "x" ]; then
         find $SPOOL/ -type f -name "*.ruptime" -mmin +10 -exec cat {} \; |sed "s,up.*,down,g" |while read a b; do printf "%-28s %s %9s\n" $a $b $(TIME_STYLE=+%s ls -l $SPOOL/${a}.ruptime|awk -vNOW=$(date +%s) '{print ((NOW-$(6))/60) }'); done;
 	find $SPOOL/ -type f -name "*.ruptime" -mmin -10 -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
     fi
-    for a in runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
+    for a in runame rload rnet rsw rbench rhw rdisk rac rwho; do
 	if [ "$CMD" = "xz.$a" ]; then
 	    (find $SPOOL/ -name "*.$a" -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
 	fi
     done
 else
     # update/add entry
-    for a in ruptime runame rload rnet rsw rboot rbench rhw rdisk rac rwho; do
+    for a in ruptime runame rload rnet rsw rbench rhw rdisk rac rwho; do
 	if [ "$CMD" = "$a" ]; then
 	    echo "$ARG" | openssl enc -d -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out - > "$SPOOL/${h}.${CMD}"
 	fi

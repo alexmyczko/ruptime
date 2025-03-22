@@ -52,7 +52,7 @@ if [ "${ARG}x" = "x" ]; then
     fi
     for a in runame rload rnet rsw rbench rhw rdisk rac rwho; do
 	if [ "$CMD" = "xz.$a" ]; then
-	    (find $SPOOL/ -name "*.$a" -exec cat {} \; |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
+	    (find $SPOOL/ -name "*.$a" -exec cat {} + |sort) | xz -c | openssl enc -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out -
 	fi
     done
 else

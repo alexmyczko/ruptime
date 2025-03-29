@@ -102,7 +102,7 @@ if [ "${1}x" = "-ux" ]; then
 				num=""
 				which $a &>/dev/null && if [ $a == "apk" ]; then num=$(apk info | wc -l); fi
 				which $a &>/dev/null && if [ $a == "dpkg" ]; then num=$(dpkg -l | grep -c '^ii'); fi
-				which $a &>/dev/null && if [ $a == "rpm" ]; then num=$(rpm -q -a --qf "i\n" | wc -l); fi
+				which $a -q -a &>/dev/null && if [ $a == "rpm" ]; then num=$(rpm -q -a --qf "i\n" | wc -l); fi
 				which $a &>/dev/null && if [ $a == "brew" ]; then num=$(brew list| wc -l); fi
 				which $a &>/dev/null && if [ $a == "pip2" ]; then num=$(pip2 list 2>/dev/null | wc -l); fi
 				which $a &>/dev/null && if [ $a == "pip3" ]; then num=$(pip3 list --local 2>/dev/null |sed "1,2d" | wc -l); fi
@@ -181,7 +181,7 @@ if [ "${1}x" = "-ux" ]; then
 			# /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 			;;
 		rdisk)
-			s=$(lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f\n", $1, $2/1024^3}')
+			s=$(lsblk -b -nd -o NAME,SIZE -e "$(awk '/(zram|zvol)/ {printf "%s,",$1}' /proc/devices)"7,11 --noempty |awk '{printf "%s %1.0f ", $1, $2/1024^3}')
 			u=$(printf "%-28s %s\n" "$k" "$s" | encrypt)
 			# macOS: diskutil info /dev/disk0 |grep Size
 			;;

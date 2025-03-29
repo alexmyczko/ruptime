@@ -52,8 +52,18 @@ fi
 
 if [ "${1}x" = "-vx" ]; then
     cat << INFO
-$0 version 1.8
+$d version 1.8
 INFO
+    exit 0
+fi
+
+if [ "${1}x" = "-hx" ]; then
+    cat << HELP
+	-a	show all hosts
+	-h	show this help
+	-i	initialize/update all infos
+	-u	update data
+HELP
     exit 0
 fi
 

@@ -83,7 +83,7 @@ k="$(eval "$HOSTNAMECMD")"
 if [ "${1}x" = "-ax" ]; then
 	for a in $ENABLED; do
 		#echo Initializing $a
-		$a | grep "$k"
+		$a | sed "/$k/!d;s/         /:$a\t/g"
 	done
 	exit 0
 fi

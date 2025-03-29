@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 export LC_ALL=C
 
+VERSION=1.8
 # Defaults
 SERVER=localhost
 PORT=51300
@@ -52,16 +53,17 @@ fi
 
 if [ "${1}x" = "-vx" ]; then
     cat << INFO
-$d version 1.8
+$d version $VERSION
 INFO
     exit 0
 fi
 
 if [ "${1}x" = "-hx" ]; then
     cat << HELP
-	-a	show all hosts
+Usage: $d [-a] [-h] [-i] [-u]
+	-a	show all hostdata 
 	-h	show this help
-	-i	initialize/update all infos
+	-i	initialize(update) all data
 	-u	update data
 HELP
     exit 0

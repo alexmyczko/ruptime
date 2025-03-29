@@ -176,7 +176,7 @@ if [ "${1}x" = "-ux" ]; then
 			;;
 		rnet)
 			netdev=$(ip route show to default |head -n1 | cut -d\  -f5)
-			if cat /sys/class/net/"${netdev}"/speed 2>/dev/null; then
+			if cat /sys/class/net/"${netdev}"/speed &>/dev/null; then
 				s="$netdev $(cat /sys/class/net/"${netdev}"/speed)Mb/s"
 			fi
 			if iwconfig "$netdev" &>/dev/null; then

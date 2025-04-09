@@ -1,8 +1,7 @@
 #!/bin/bash
 
 export LC_ALL=C
-#d=$(basename "$0")
-#pgrep "$d -u" >/dev/null && exit 0
+d=$(basename "$0")
 
 if [ -f /etc/ruptime/ruptime.conf ]; then
     . /etc/ruptime/ruptime.conf
@@ -34,7 +33,6 @@ if [ "${SERVER}x" = "x" ]; then echo "SERVER not set"; exit 1; fi
 if [ "${PORT}x" = "x" ]; then echo "PORT not set"; exit 1; fi
 if [ "${HOSTNAMECMD}x" = "x" ]; then echo "HOSTNAMECMD not set"; exit 1; fi
 
-d=$(basename "$0")
 if [ "${1}x" = "-cx" ]; then
     # colors for % output of rload
     exec 1> >(sed "s, [0-9]\.[0-9][0-9],\x1b[38;5;118m&\x1b[0m,g" | sed "s, [0-8][0-9]\.[0-9][0-9],\x1b[38;5;118m&\x1b[0m,g" | sed "s, [9][0-4]\.[0-9][0-9],\x1b[38;5;226m&\x1b[0m,g" | sed "s, [9][5-9]\.[0-9][0-9],\x1b[38;5;208m&\x1b[0m,g" | sed "s, [1-9][0-9][0-9]\.[0-9][0-9],\x1b[38;5;196m&\x1b[0m,g")
@@ -195,7 +193,6 @@ done)
     exit 0
 fi
 
-d=$(basename "$0")
 (echo xz."$d") |
 (nc "$SERVER" "$PORT") |
 (openssl enc -d -A -a -aes-192-cbc -pbkdf2 -pass env:KEY -in - -out - | xz -d 2>/dev/null || echo "NO DATA FOUND ($?)" 1>&2)

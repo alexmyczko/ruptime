@@ -6,8 +6,6 @@ After=remote-fs.target nss-user-lookup.target
 [Service]
 EnvironmentFile=-/etc/ruptime/ruptime.conf
 ExecStart=/usr/bin/daemon --user=ruptime:ruptime /usr/bin/mini-inetd $PORT /usr/sbin/ruptimed
-# if you have bkt, you might want to use
-# ExecStart=/usr/bin/daemon --user=ruptime:ruptime /usr/bin/mini-inetd $PORT /usr/bin/bkt -- /usr/sbin/ruptimed
 IgnoreSIGPIPE=false
 KillMode=process
 Restart=on-failure

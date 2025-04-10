@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 export LC_ALL=C
+d=$(basename "$0")
 
 VERSION=1.8
 # Defaults

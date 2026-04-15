@@ -1,0 +1,15 @@
+[Unit]
+Description=Update the ruptime entry minutely
+
+[Timer]
+OnCalendar=minutely
+Persistent=true
+
+#OnBootSec=0
+#OnUnitActiveSec=60sec
+
+#RandomizedDelaySec=60sec
+#AccuracySec=1sec
+
+[Install]
+WantedBy=timers.target

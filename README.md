@@ -113,6 +113,7 @@ No option queries the server for the information.
 - you want to see what hosts are not idle
 - you want to run something on all running hosts with `parallel`
 - get rid of non-standard/in-house solutions that do not scale or are cumbersome in some other way
+- also works on read-only filesystem systems (the client), the server can have a ram disk for spool
 
 ## Real life examples
 Get an overview of your operating systems and releases

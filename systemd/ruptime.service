@@ -1,0 +1,6 @@
+[Unit]
+Description=Update ruptime entry
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ruptime -u
